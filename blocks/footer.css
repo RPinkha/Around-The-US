@@ -14,13 +14,11 @@
 @media screen and (max-width: 620px) {
   .footer {
     padding: 48px 0 36px;
+    max-width: 282px;
   }
 
   .footer__copyright {
     font-size: 14px;
     line-height: 17px;
-    padding-right: 119px;
-    margin: 0 auto;
-    justify-self: flex-start;
   }
 }
