@@ -1,0 +1,26 @@
+.header {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding-top: 45px;
+  border-bottom: 1px solid rgba(84, 84, 84, 0.7);
+}
+
+.header__logo {
+  width: 173px;
+  height: 33px;
+  margin: 0 707px 41px 0;
+}
+
+@media screen and (max-width: 620px) {
+  .header {
+    padding: 28px 0 32px;
+    margin: 0 auto;
+  }
+  .header__logo {
+    padding-left: 8px;
+    margin: 0 auto 0 0;
+    width: 126px;
+    height: 24px;
+  }
+}
