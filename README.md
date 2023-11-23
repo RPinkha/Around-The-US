@@ -1,21 +1,20 @@
 # Project 3: Around The U.S.
 
-### Overview  
+### Overview
 
-* Intro  
-* Figma  
-* Images  
-  
-**Intro**
-  
-This project is made so all the elements are displayed correctly on popular screen sizes. We recommend investing more time in completing this project, since it's more difficult than previous ones.  
-  
-**Figma**  
-  
-* [Link to the project on Figma](https://www.figma.com/file/ii4xxsJ0ghevUOcssTlHZv/Sprint-3%3A-Around-the-US?node-id=0%3A1)  
-  
-**Images**  
-  
-The way you'll do this at work is by exporting images directly from Figma — we recommend doing that to practice more. Don't forget to optimize them [here](https://tinypng.com/), so your project loads faster. 
-  
-Good luck and have fun!
+- Project Name
+- Project Description
+- Technologies Used
+- Link to Github-Pages
+
+**Project Name:**
+TripleTen Around the US - Project 3
+
+**Project Description:**
+This is project 3 of the TripleTen bootcamp. It shows the places visited by a person in the US.
+
+**Technologies Used:**
+In this project I used HTML and CSS. Unlike previous projects, this project utilizes a responsive design, where any screen-size can load the page without issues.
+
+**Link to Github-Pages:**
+https://rpinkha.github.io/TripleTen-Project3-AroundTheUS/
