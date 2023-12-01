@@ -33,6 +33,7 @@
   left: calc(100% + 5px);
   border: 0;
   padding: 0;
+  transition: opacity 0.3s linear;
 }
 
 .modal__close:hover {
@@ -63,7 +64,7 @@
   height: 27px;
 }
 
-.modal__button {
+.modal__save {
   color: #fff;
   height: 50px;
   background-color: black;
@@ -74,6 +75,12 @@
   border: 0;
   margin-top: 18px;
   width: 358px;
+  transition: opacity 0.3s linear;
+}
+
+.modal__save:hover {
+  opacity: 0.8;
+  cursor: pointer;
 }
 
 @media screen and (max-width: 650px) {
