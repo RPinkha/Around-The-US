@@ -35,6 +35,11 @@
   padding: 0;
 }
 
+.modal__close:hover {
+  opacity: 0.6;
+  cursor: pointer;
+}
+
 .modal__title {
   color: black;
   font-weight: 900;
