@@ -29,19 +29,20 @@ function createCard(data) {
   let cardTemplate = document.querySelector("#card").content;
   let cardElement = cardTemplate.querySelector(".card").cloneNode(true);
   cardElement.querySelector(".card__title").textContent = data.name;
-  cardElement.querySelector(".card__image").setAttribute("src", data.link);
-  cardElement.querySelector(".card__image").setAttribute("alt", data.name);
+  let cardImage = cardElement.querySelector(".card__image");
+  cardImage.setAttribute("src", data.link);
+  cardImage.setAttribute("alt", data.name);
   return cardElement;
 }
 
-cardsContainer = document.querySelector(".cards__list");
+const cardsContainer = document.querySelector(".cards__list");
 
-for (i = 0; i < initialCards.length; i++) {
-  const card = createCard(initialCards[i]);
+initialCards.forEach((item) => {
+  const card = createCard(item);
   cardsContainer.append(card);
-}
+});
 
-var profile = document.querySelector(".profile");
+const profile = document.querySelector(".profile");
 var editButton = profile.querySelector(".profile__edit-button");
 let addButton = profile.querySelector(".profile__add-button");
 
@@ -56,9 +57,12 @@ var form = document.querySelector(".modal__form");
 var modalName = modal.querySelector(".modal__input-name");
 var modalDescription = modal.querySelector(".modal__input-description");
 
-function toggleModal() {
+function fillProfileInputs() {
   modalName.value = profileName.textContent;
   modalDescription.value = profileDescription.textContent;
+}
+
+function toggleModal() {
   modal.classList.toggle("modal_opened");
 }
 
@@ -66,10 +70,14 @@ function handleFormSubmit(evt) {
   evt.preventDefault();
   profileName.textContent = modalName.value;
   profileDescription.textContent = modalDescription.value;
-  modal.classList.toggle("modal_opened");
+  toggleModal();
 }
 
 form.addEventListener("submit", handleFormSubmit);
 
-editButton.addEventListener("click", toggleModal);
+editButton.addEventListener("click", () => {
+  toggleModal();
+  fillProfileInputs();
+});
+
 exitButton.addEventListener("click", toggleModal);
