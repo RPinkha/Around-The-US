@@ -1,4 +1,4 @@
-let initialCards = [
+const initialCards = [
   {
     name: "Yosemite Valley",
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/yosemite.jpg",
@@ -26,10 +26,10 @@ let initialCards = [
 ];
 
 function createCard(data) {
-  let cardTemplate = document.querySelector("#card").content;
-  let cardElement = cardTemplate.querySelector(".card").cloneNode(true);
+  const cardTemplate = document.querySelector("#card").content;
+  const cardElement = cardTemplate.querySelector(".card").cloneNode(true);
   cardElement.querySelector(".card__title").textContent = data.name;
-  let cardImage = cardElement.querySelector(".card__image");
+  const cardImage = cardElement.querySelector(".card__image");
   cardImage.setAttribute("src", data.link);
   cardImage.setAttribute("alt", data.name);
   return cardElement;
@@ -43,19 +43,19 @@ initialCards.forEach((item) => {
 });
 
 const profile = document.querySelector(".profile");
-var editButton = profile.querySelector(".profile__edit-button");
-let addButton = profile.querySelector(".profile__add-button");
+const editButton = profile.querySelector(".profile__edit-button");
+const addButton = profile.querySelector(".profile__add-button");
 
-var profileName = profile.querySelector(".profile__name");
-var profileDescription = profile.querySelector(".profile__description");
+const profileName = profile.querySelector(".profile__name");
+const profileDescription = profile.querySelector(".profile__description");
 
-var modal = document.querySelector(".modal");
-let exitButton = modal.querySelector(".modal__close");
-let saveButton = modal.querySelector(".modal__save");
-var form = document.querySelector(".modal__form");
+const modal = document.querySelector(".modal");
+const exitButton = modal.querySelector(".modal__close");
+const saveButton = modal.querySelector(".modal__save");
+const profileForm = document.forms["profileForm"];
 
-var modalName = modal.querySelector(".modal__input-name");
-var modalDescription = modal.querySelector(".modal__input-description");
+const modalName = modal.querySelector(".modal__input_type_name");
+const modalDescription = modal.querySelector(".modal__input_type_description");
 
 function fillProfileInputs() {
   modalName.value = profileName.textContent;
@@ -73,7 +73,7 @@ function handleFormSubmit(evt) {
   toggleModal();
 }
 
-form.addEventListener("submit", handleFormSubmit);
+profileForm.addEventListener("submit", handleFormSubmit);
 
 editButton.addEventListener("click", () => {
   toggleModal();
