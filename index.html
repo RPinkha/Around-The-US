@@ -67,7 +67,7 @@
       <footer class="footer page__section">
         <p class="footer__copyright">© 2023 Ruven Pinkhasov</p>
       </footer>
-      <div class="modal">
+      <div class="modal" id="modal-profile-edit">
         <div class="modal__container">
           <button class="modal__close"></button>
           <p class="modal__title">Edit Profile</p>
@@ -85,6 +85,27 @@
               name="description"
             />
             <button class="modal__save" type="submit">Save</button>
+          </form>
+        </div>
+      </div>
+      <div class="modal" id="modal-add-card">
+        <div class="modal__container">
+          <button class="modal__close"></button>
+          <p class="modal__title">New Place</p>
+          <form class="modal__form" name="addCardForm">
+            <input
+              type="text"
+              class="modal__input modal__input_type_title"
+              placeholder="Title"
+              name="title"
+            />
+            <input
+              type="text"
+              class="modal__input modal__input_type_image-link"
+              placeholder="Image link"
+              name="image link"
+            />
+            <button class="modal__create" type="submit">Create</button>
           </form>
         </div>
       </div>
