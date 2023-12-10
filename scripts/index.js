@@ -49,35 +49,42 @@ const addButton = profile.querySelector(".profile__add-button");
 const profileName = profile.querySelector(".profile__name");
 const profileDescription = profile.querySelector(".profile__description");
 
-const modal = document.querySelector(".modal");
-const exitButton = modal.querySelector(".modal__close");
-const saveButton = modal.querySelector(".modal__save");
+const modalProfileEdit = document.querySelector("#modal-profile-edit");
+const profileEditExitButton = modalProfileEdit.querySelector(".modal__close");
 const profileForm = document.forms["profileForm"];
 
-const modalName = modal.querySelector(".modal__input_type_name");
-const modalDescription = modal.querySelector(".modal__input_type_description");
+const modalProfileName = modalProfileEdit.querySelector(
+  ".modal__input_type_name"
+);
+const modalProfileDescription = modalProfileEdit.querySelector(
+  ".modal__input_type_description"
+);
 
 function fillProfileInputs() {
-  modalName.value = profileName.textContent;
-  modalDescription.value = profileDescription.textContent;
+  modalProfileName.value = profileName.textContent;
+  modalProfileDescription.value = profileDescription.textContent;
 }
 
-function toggleModal() {
-  modal.classList.toggle("modal_opened");
+function closeProfileModal() {
+  modalProfileEdit.classList.remove("modal_opened");
+}
+
+function openProfileModal() {
+  modalProfileEdit.classList.add("modal_opened");
 }
 
 function handleFormSubmit(evt) {
   evt.preventDefault();
-  profileName.textContent = modalName.value;
-  profileDescription.textContent = modalDescription.value;
-  toggleModal();
+  profileName.textContent = modalProfileName.value;
+  profileDescription.textContent = modalProfileDescription.value;
+  closeProfileModal();
 }
 
 profileForm.addEventListener("submit", handleFormSubmit);
 
 editButton.addEventListener("click", () => {
-  toggleModal();
+  openProfileModal();
   fillProfileInputs();
 });
 
-exitButton.addEventListener("click", toggleModal);
+profileEditExitButton.addEventListener("click", closeProfileModal);
