@@ -91,7 +91,10 @@ profileEditExitBtn.addEventListener("click", closeProfileModal);
 const modalAddImage = document.querySelector("#modal-add-card");
 const addImageExitBtn = modalAddImage.querySelector(".modal__close");
 const imageAddForm = document.forms["addCardForm"];
-
+const modalImageTitle = modalAddImage.querySelector(".modal__input_type_title");
+const modalImageLink = modalAddImage.querySelector(
+  ".modal__input_type_image-link"
+);
 function closeAddImageModal() {
   modalAddImage.classList.remove("modal_opened");
 }
@@ -103,3 +106,13 @@ function openAddImageModal() {
 addImageExitBtn.addEventListener("click", closeAddImageModal);
 
 addButton.addEventListener("click", openAddImageModal);
+
+function handleAddImageFormSubmit(evt) {
+  evt.preventDefault();
+  const userCard = {};
+  userCard["name"] = modalImageTitle.value;
+  userCard["link"] = modalImageLink.value;
+  const card = createCard(userCard);
+  cardsContainer.append(card);
+  closeAddImageModal();
+}
