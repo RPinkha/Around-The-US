@@ -116,3 +116,5 @@ function handleAddImageFormSubmit(evt) {
   cardsContainer.append(card);
   closeAddImageModal();
 }
+
+imageAddForm.addEventListener("submit", handleAddimageFormSubmit());
