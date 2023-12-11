@@ -78,7 +78,26 @@
   transition: opacity 0.3s linear;
 }
 
+.modal__create {
+  color: #fff;
+  height: 50px;
+  background-color: black;
+  border-radius: 2px;
+  font-size: 18px;
+  line-height: 22px;
+  padding: 0;
+  border: 0;
+  margin-top: 18px;
+  width: 358px;
+  transition: opacity 0.3s linear;
+}
+
 .modal__save:hover {
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+.modal__create:hover {
   opacity: 0.8;
   cursor: pointer;
 }
@@ -104,6 +123,14 @@
   }
 
   .modal__save {
+    width: 238px;
+    font-size: 14px;
+    line-height: 17px;
+    height: 46px;
+    margin-top: 15px;
+  }
+
+  .modal__create {
     width: 238px;
     font-size: 14px;
     line-height: 17px;

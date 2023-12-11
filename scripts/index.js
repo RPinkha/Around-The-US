@@ -45,12 +45,11 @@ initialCards.forEach((item) => {
 const profile = document.querySelector(".profile");
 const editButton = profile.querySelector(".profile__edit-button");
 const addButton = profile.querySelector(".profile__add-button");
-
 const profileName = profile.querySelector(".profile__name");
 const profileDescription = profile.querySelector(".profile__description");
 
 const modalProfileEdit = document.querySelector("#modal-profile-edit");
-const profileEditExitButton = modalProfileEdit.querySelector(".modal__close");
+const profileEditExitBtn = modalProfileEdit.querySelector(".modal__close");
 const profileForm = document.forms["profileForm"];
 
 const modalProfileName = modalProfileEdit.querySelector(
@@ -65,26 +64,42 @@ function fillProfileInputs() {
   modalProfileDescription.value = profileDescription.textContent;
 }
 
-function closeProfileModal() {
-  modalProfileEdit.classList.remove("modal_opened");
-}
-
 function openProfileModal() {
   modalProfileEdit.classList.add("modal_opened");
 }
 
-function handleFormSubmit(evt) {
+function closeProfileModal() {
+  modalProfileEdit.classList.remove("modal_opened");
+}
+
+function handleProfileFormSubmit(evt) {
   evt.preventDefault();
   profileName.textContent = modalProfileName.value;
   profileDescription.textContent = modalProfileDescription.value;
   closeProfileModal();
 }
 
-profileForm.addEventListener("submit", handleFormSubmit);
+profileForm.addEventListener("submit", handleProfileFormSubmit);
 
 editButton.addEventListener("click", () => {
   openProfileModal();
   fillProfileInputs();
 });
 
-profileEditExitButton.addEventListener("click", closeProfileModal);
+profileEditExitBtn.addEventListener("click", closeProfileModal);
+
+const modalAddImage = document.querySelector("#modal-add-card");
+const addImageExitBtn = modalAddImage.querySelector(".modal__close");
+const imageAddForm = document.forms["addCardForm"];
+
+function closeAddImageModal() {
+  modalAddImage.classList.remove("modal_opened");
+}
+
+function openAddImageModal() {
+  modalAddImage.classList.add("modal_opened");
+}
+
+addImageExitBtn.addEventListener("click", closeAddImageModal);
+
+addButton.addEventListener("click", openAddImageModal);
