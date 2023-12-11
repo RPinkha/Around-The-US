@@ -95,6 +95,7 @@ const modalImageTitle = modalAddImage.querySelector(".modal__input_type_title");
 const modalImageLink = modalAddImage.querySelector(
   ".modal__input_type_image-link"
 );
+
 function closeAddImageModal() {
   modalAddImage.classList.remove("modal_opened");
 }
@@ -113,8 +114,10 @@ function handleAddImageFormSubmit(evt) {
   userCard["name"] = modalImageTitle.value;
   userCard["link"] = modalImageLink.value;
   const card = createCard(userCard);
-  cardsContainer.append(card);
+  cardsContainer.prepend(card);
   closeAddImageModal();
 }
 
-imageAddForm.addEventListener("submit", handleAddimageFormSubmit());
+imageAddForm.addEventListener("submit", handleAddImageFormSubmit);
+
+const likeButtons = document.querySelectorAll(".card__like-button");
