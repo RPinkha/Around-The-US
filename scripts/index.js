@@ -25,7 +25,11 @@ const initialCards = [
   },
 ];
 
+//--------------------SELECT CARDS CONTAINER-------------------->>
 const cardsContainer = document.querySelector(".cards__list");
+
+//--------------------SELECT ALL CLOSE BUTTONS ELEMENTS-------------------->>
+const closeButtons = document.querySelectorAll(".modal__close");
 
 //--------------------PROFILE ELEMENTS-------------------->>
 const profile = document.querySelector(".profile");
@@ -36,7 +40,6 @@ const profileDescription = profile.querySelector(".profile__description");
 
 //--------------------PROFILE EDIT MODAL ELEMENTS-------------------->>
 const modalProfileEdit = document.querySelector("#modal-profile-edit");
-const profileEditExitBtn = modalProfileEdit.querySelector(".modal__close");
 const profileForm = document.forms["profileForm"];
 const profileNameInput = modalProfileEdit.querySelector(
   ".modal__input_type_name"
@@ -47,7 +50,6 @@ const profileDescriptionInput = modalProfileEdit.querySelector(
 
 //--------------------ADD IMAGE MODAL ELEMENTS-------------------->>
 const modalAddImage = document.querySelector("#modal-add-card");
-const addImageExitBtn = modalAddImage.querySelector(".modal__close");
 const imageAddForm = document.forms["addCardForm"];
 const modalImageTitle = modalAddImage.querySelector(".modal__input_type_title");
 const modalImageLink = modalAddImage.querySelector(
@@ -56,7 +58,6 @@ const modalImageLink = modalAddImage.querySelector(
 
 //-----------------IMAGE PREVIEW MODAL ELEMENTS------------------>>
 const modalImagePreview = document.querySelector("#image-preview-modal");
-const imagePreviewExitBtn = modalImagePreview.querySelector(".modal__close");
 const previewImage = modalImagePreview.querySelector(".modal__image");
 const previewImageTitle = modalImagePreview.querySelector(
   ".modal__image-title"
@@ -130,13 +131,14 @@ editButton.addEventListener("click", () => {
   openModal(modalProfileEdit);
   fillProfileInputs();
 });
-profileEditExitBtn.addEventListener("click", closeModal(modalProfileEdit));
 profileForm.addEventListener("submit", handleProfileFormSubmit);
 
 //--------------------ADD IMAGE MODAL EVENTS-------------------->>
-addImageExitBtn.addEventListener("click", closeModal(modalAddImage));
-addButton.addEventListener("click", openModal(modalAddImage));
+addButton.addEventListener("click", () => openModal(modalAddImage));
 imageAddForm.addEventListener("submit", handleAddImageFormSubmit);
 
-//--------------------IMAGE PREVIEW MODAL EVENTS-------------------->>
-imagePreviewExitBtn.addEventListener("click", closeModal(modalImagePreview));
+//--------------------MODAL CLOSE EVENT LOOP-------------------->>
+closeButtons.forEach((button) => {
+  const modal = button.closest(".modal");
+  button.addEventListener("click", () => closeModal(modal));
+});
