@@ -59,7 +59,7 @@ const modalImagePreview = document.querySelector("#image-preview-modal");
 const imagePreviewExitBtn = modalImagePreview.querySelector(".modal__close");
 const previewImage = modalImagePreview.querySelector(".modal__image");
 const previewImageTitle = modalImagePreview.querySelector(
-  ".modal__image_title"
+  ".modal__image-title"
 );
 
 //------------------FUNCTION THAT CREATS CARDS------------------>>
