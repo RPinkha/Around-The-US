@@ -25,6 +25,7 @@ const initialCards = [
   },
 ];
 
+//------------------FUNCTION THAT CREATS CARDS------------------>>
 function createCard(data) {
   const cardTemplate = document.querySelector("#card").content;
   const cardElement = cardTemplate.querySelector(".card").cloneNode(true);
@@ -33,18 +34,17 @@ function createCard(data) {
   cardImage.setAttribute("src", data.link);
   cardImage.setAttribute("alt", data.name);
   const likeButton = cardElement.querySelector(".card__like-button");
-  likeButton.addEventListener("click", function () {
+  likeButton.addEventListener("click", () => {
     likeButton.classList.toggle("card__like-button_active");
+  });
+  const trashButton = cardElement.querySelector(".card__trash-button");
+  trashButton.addEventListener("click", () => {
+    cardElement.remove();
   });
   return cardElement;
 }
 
 const cardsContainer = document.querySelector(".cards__list");
-
-initialCards.forEach((item) => {
-  const card = createCard(item);
-  cardsContainer.append(card);
-});
 
 //--------------------PROFILE ELEMENTS-------------------->>
 const profile = document.querySelector(".profile");
@@ -98,6 +98,12 @@ const modalImageTitle = modalAddImage.querySelector(".modal__input_type_title");
 const modalImageLink = modalAddImage.querySelector(
   ".modal__input_type_image-link"
 );
+
+//--------------------ADDING INITIAL CARDS------------------------>>
+initialCards.forEach((item) => {
+  const card = createCard(item);
+  cardsContainer.append(card);
+});
 
 //--------------------ADD IMAGE MODAL FUNCTIONS-------------------->>
 function closeAddImageModal() {
