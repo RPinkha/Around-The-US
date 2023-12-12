@@ -69,7 +69,7 @@
       </footer>
       <div class="modal" id="modal-profile-edit">
         <div class="modal__container">
-          <button class="modal__close"></button>
+          <button class="modal__close modal__close_type_form"></button>
           <p class="modal__title">Edit Profile</p>
           <form class="modal__form" name="profileForm">
             <input
@@ -90,7 +90,7 @@
       </div>
       <div class="modal" id="modal-add-card">
         <div class="modal__container">
-          <button class="modal__close"></button>
+          <button class="modal__close modal__close_type_form"></button>
           <p class="modal__title">New Place</p>
           <form class="modal__form" name="addCardForm">
             <input
@@ -107,6 +107,13 @@
             />
             <button class="modal__create" type="submit">Create</button>
           </form>
+        </div>
+      </div>
+      <div class="modal" id="image-preview-modal">
+        <div class="modal__container modal__container_type_image">
+          <button class="modal__close modal__close_type_image"></button>
+          <img class="modal__image" src="" />
+          <p class="modal__image_title"></p>
         </div>
       </div>
     </div>
