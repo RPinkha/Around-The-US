@@ -82,7 +82,7 @@ function createCard(data) {
     previewImage.setAttribute("src", data.link);
     previewImage.setAttribute("alt", data.name);
     previewImageTitle.textContent = data.name;
-    modalImagePreview.classList.add("modal_opened");
+    openModal(modalImagePreview);
   });
   return cardElement;
 }
@@ -93,31 +93,27 @@ initialCards.forEach((item) => {
   cardsContainer.append(card);
 });
 
+//--------------------OPEN AND CLOSE MODAL FUNCTIONS-------------------->>
+function openModal(modal) {
+  modal.classList.add("modal_opened");
+}
+function closeModal(modal) {
+  modal.classList.remove("modal_opened");
+}
+
 //--------------------PROFILE EDIT MODAL FUNCTIONS-------------------->>
 function fillProfileInputs() {
   profileNameInput.value = profileName.textContent;
   profileDescriptionInput.value = profileDescription.textContent;
 }
-function openProfileModal() {
-  modalProfileEdit.classList.add("modal_opened");
-}
-function closeProfileModal() {
-  modalProfileEdit.classList.remove("modal_opened");
-}
 function handleProfileFormSubmit(evt) {
   evt.preventDefault();
   profileName.textContent = profileNameInput.value;
   profileDescription.textContent = profileDescriptionInput.value;
-  closeProfileModal();
+  closeModal(modalProfileEdit);
 }
 
 //--------------------ADD IMAGE MODAL FUNCTIONS-------------------->>
-function closeAddImageModal() {
-  modalAddImage.classList.remove("modal_opened");
-}
-function openAddImageModal() {
-  modalAddImage.classList.add("modal_opened");
-}
 function handleAddImageFormSubmit(evt) {
   evt.preventDefault();
   const userCard = {};
@@ -126,29 +122,21 @@ function handleAddImageFormSubmit(evt) {
   const card = createCard(userCard);
   cardsContainer.prepend(card);
   imageAddForm.reset();
-  closeAddImageModal();
-}
-
-//--------------------IMAGE PREVIEW MODAL FUNCTIONS-------------------->>
-function closeImagePreviewModal() {
-  modalImagePreview.classList.remove("modal_opened");
-}
-function openImagePreviewModal() {
-  modalImagePreview.classList.add("modal_opened");
+  closeModal(modalAddImage);
 }
 
 //--------------------PROFILE EDIT MODAL EVENTS-------------------->>
 editButton.addEventListener("click", () => {
-  openProfileModal();
+  openModal(modalProfileEdit);
   fillProfileInputs();
 });
-profileEditExitBtn.addEventListener("click", closeProfileModal);
+profileEditExitBtn.addEventListener("click", closeModal(modalProfileEdit));
 profileForm.addEventListener("submit", handleProfileFormSubmit);
 
 //--------------------ADD IMAGE MODAL EVENTS-------------------->>
-addImageExitBtn.addEventListener("click", closeAddImageModal);
-addButton.addEventListener("click", openAddImageModal);
+addImageExitBtn.addEventListener("click", closeModal(modalAddImage));
+addButton.addEventListener("click", openModal(modalAddImage));
 imageAddForm.addEventListener("submit", handleAddImageFormSubmit);
 
 //--------------------IMAGE PREVIEW MODAL EVENTS-------------------->>
-imagePreviewExitBtn.addEventListener("click", closeImagePreviewModal);
+imagePreviewExitBtn.addEventListener("click", closeModal(modalImagePreview));
