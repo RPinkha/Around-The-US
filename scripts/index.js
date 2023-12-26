@@ -101,6 +101,8 @@ function openModal(modal) {
 }
 function closeModal(modal) {
   modal.classList.remove("modal_opened");
+  const form = modal.querySelector(".modal__form");
+  form.reset();
 }
 
 //--------------------PROFILE EDIT MODAL FUNCTIONS-------------------->>
@@ -143,6 +145,7 @@ closeButtons.forEach((button) => {
   button.addEventListener("click", () => closeModal(modal));
 });
 
+//--------------------CLOSE MODALS WITH ESCAPE KEY-------------------->>
 modalList.forEach((modal) =>
   document.addEventListener("keydown", (evt) => {
     if (evt.key === "Escape") {
