@@ -123,7 +123,6 @@ function handleAddImageFormSubmit(evt) {
   userCard["link"] = modalImageLink.value;
   const card = createCard(userCard);
   cardsContainer.prepend(card);
-  imageAddForm.reset();
   closeModal(modalAddImage);
 }
 
@@ -145,7 +144,7 @@ closeButtons.forEach((button) => {
 });
 
 modalList.forEach((modal) =>
-  modal.addEventListener("keydown", (evt) => {
+  document.addEventListener("keydown", (evt) => {
     if (evt.key === "Escape") {
       closeModal(modal);
     }
