@@ -29,6 +29,7 @@ const initialCards = [
 const cardsContainer = document.querySelector(".cards__list");
 
 //--------------------SELECT ALL CLOSE BUTTONS ELEMENTS-------------------->>
+const modalList = Array.from(document.querySelectorAll(".modal"));
 const closeButtons = document.querySelectorAll(".modal__close");
 
 //--------------------PROFILE ELEMENTS-------------------->>
@@ -137,8 +138,16 @@ profileForm.addEventListener("submit", handleProfileFormSubmit);
 addButton.addEventListener("click", () => openModal(modalAddImage));
 imageAddForm.addEventListener("submit", handleAddImageFormSubmit);
 
-//--------------------MODAL CLOSE EVENT LOOP-------------------->>
+//--------------------MODAL CLOSE EVENT LOOPS-------------------->>
 closeButtons.forEach((button) => {
   const modal = button.closest(".modal");
   button.addEventListener("click", () => closeModal(modal));
 });
+
+modalList.forEach((modal) =>
+  modal.addEventListener("keydown", (evt) => {
+    if (evt.key === "Escape") {
+      closeModal(modal);
+    }
+  })
+);
