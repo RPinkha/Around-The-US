@@ -74,6 +74,10 @@
   width: 100%;
 }
 
+.modal__input_type_error {
+  border-color: #ff0000;
+}
+
 .modal__button {
   color: #fff;
   height: 50px;
@@ -90,7 +94,6 @@
 
 .modal__button_disabled {
   background: #f6f6f6;
-  border-radius: 2px;
   border: 1px solid #000;
   color: #000;
   opacity: 0.2;
@@ -117,7 +120,7 @@
   position: relative;
 }
 
-.modal__input_type_error {
+.modal__error {
   font-size: 12px;
   line-height: 15px;
   font-weight: 400;
@@ -125,6 +128,12 @@
   position: absolute;
   left: 0;
   top: calc(100% + 6px);
+  opacity: 0;
+  transition: opacity 1s;
+}
+
+.modal__error_active {
+  opacity: 1;
 }
 
 @media screen and (max-width: 650px) {
