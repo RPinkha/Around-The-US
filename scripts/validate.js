@@ -26,14 +26,16 @@ const hasInvalidInput = (inputList) => {
   });
 };
 
+//--------------------Function to Toggle Button State-------------------->>
 const toggleButtonState = (inputList, buttonElement) => {
   if (hasInvalidInput(inputList)) {
-    buttonElement.classList.add("modal__button_disabled");
+    return buttonElement.classList.add("modal__button_disabled");
   } else {
-    buttonElement.classList.remove("modal__button_disabled");
+    return buttonElement.classList.remove("modal__button_disabled");
   }
 };
 
+//--------------------Function to Set Event Listeners-------------------->>
 function setEventListeners(formElement, config) {
   const { inputSelector } = config;
   const { submitButtonSelector } = config;
@@ -48,6 +50,7 @@ function setEventListeners(formElement, config) {
   });
 }
 
+//--------------------Function to Enable Validation-------------------->>
 function enableValidation(config) {
   const { formSelector } = config;
   const formList = Array.from(document.querySelectorAll(formSelector));
@@ -56,6 +59,7 @@ function enableValidation(config) {
   });
 }
 
+//--------------------Config Object-------------------->>
 const config = {
   formSelector: ".modal__form",
   inputSelector: ".modal__input",

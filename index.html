@@ -76,22 +76,27 @@
               type="text"
               class="modal__input modal__input_type_name"
               placeholder="Name"
-              name="name"
+              id="name"
+              name="person-name"
               minlength="2"
               maxlength="40"
               required
             />
-            <span class="modal__input-error"></span>
+            <span class="modal__input-error" id="person-name-error"></span>
             <input
               type="text"
               class="modal__input modal__input_type_description"
               placeholder="Description"
               name="description"
+              id="person-description"
               minlength="2"
               maxlength="200"
               required
             />
-            <span class="modal__input-error"></span>
+            <span
+              class="modal__input-error"
+              id="person-description-error"
+            ></span>
             <button class="modal__button" type="submit">Save</button>
           </form>
         </div>
@@ -107,11 +112,12 @@
                 class="modal__input modal__input_type_title"
                 placeholder="Title"
                 name="title"
+                id="card-title"
                 minlength="1"
                 maxlength="30"
                 required
               />
-              <span class="modal__input-error"></span>
+              <span class="modal__input-error" id="card-title-error"></span>
             </label>
             <label class="modal__label">
               <input
@@ -119,9 +125,10 @@
                 class="modal__input modal__input_type_image-link"
                 placeholder="Image link"
                 name="image link"
+                id="card-url"
                 required
               />
-              <span class="modal__input-error">Error</span>
+              <span class="modal__input-error" id="card-url-error">Error</span>
             </label>
             <button class="modal__button" type="submit">Create</button>
           </form>
