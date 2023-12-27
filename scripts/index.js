@@ -68,8 +68,9 @@ const previewImageTitle = modalImagePreview.querySelector(
 function createCard(data) {
   const cardTemplate = document.querySelector("#card").content;
   const cardElement = cardTemplate.querySelector(".card").cloneNode(true);
-  cardElement.querySelector(".card__title").textContent = data.name;
+  const cardTitle = cardElement.querySelector(".card__title");
   const cardImage = cardElement.querySelector(".card__image");
+  cardTitle.textContent = data.name;
   cardImage.setAttribute("src", data.link);
   cardImage.setAttribute("alt", data.name);
   const likeButton = cardElement.querySelector(".card__like-button");
@@ -95,14 +96,31 @@ initialCards.forEach((item) => {
   cardsContainer.append(card);
 });
 
+//---------------CLOSE MODALS WITH ESCAPE KEY FUNCTIONS--------------->>
+function closeModalByEscape(evt) {
+  if (evt.key === "Escape") {
+    const openedModal = document.querySelector(".modal_opened");
+    closeModal(openedModal);
+  }
+}
+
+//---------------CLOSE MODALS PRESSING OUTSIDE OF MODAL--------------->>
+function closeModalOnRemoteClick(evt) {
+  if (evt.target === evt.currentTarget) {
+    closeModal(evt.currentTarget);
+  }
+}
+
 //--------------------OPEN AND CLOSE MODAL FUNCTIONS-------------------->>
 function openModal(modal) {
   modal.classList.add("modal_opened");
+  document.addEventListener("keydown", closeModalByEscape);
+  modal.addEventListener("mousedown", closeModalOnRemoteClick);
 }
 function closeModal(modal) {
   modal.classList.remove("modal_opened");
-  const form = modal.querySelector(".modal__form");
-  form.reset();
+  document.removeEventListener("keydown", closeModalByEscape);
+  modal.removeEventListener("mousedown", closeModalOnRemoteClick);
 }
 
 //--------------------PROFILE EDIT MODAL FUNCTIONS-------------------->>
@@ -125,6 +143,7 @@ function handleAddImageFormSubmit(evt) {
   userCard["link"] = modalImageLink.value;
   const card = createCard(userCard);
   cardsContainer.prepend(card);
+  imageAddForm.reset();
   closeModal(modalAddImage);
 }
 
@@ -139,23 +158,8 @@ profileForm.addEventListener("submit", handleProfileFormSubmit);
 addButton.addEventListener("click", () => openModal(modalAddImage));
 imageAddForm.addEventListener("submit", handleAddImageFormSubmit);
 
-//--------------------CLOSE MODALS WITH ESCAPE KEY-------------------->>
-modalList.forEach((modal) =>
-  document.addEventListener("keydown", (evt) => {
-    if (evt.key === "Escape") {
-      closeModal(modal);
-    }
-  })
-);
-
-//-----------------CLOSE MODALS WITH PRESS OUTSIDE OF MODAL---------------->>
-modalList.forEach((modal) =>
-  modal.addEventListener("mousedown", (evt) => {
-    if (
-      evt.target.classList.contains("modal") ||
-      evt.target.classList.contains("modal__close")
-    ) {
-      closeModal(modal);
-    }
-  })
-);
+//--------------------MODAL CLOSE EVENT LOOP-------------------->>
+closeButtons.forEach((button) => {
+  const modal = button.closest(".modal");
+  button.addEventListener("click", () => closeModal(modal));
+});
