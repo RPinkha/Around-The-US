@@ -139,16 +139,22 @@ profileForm.addEventListener("submit", handleProfileFormSubmit);
 addButton.addEventListener("click", () => openModal(modalAddImage));
 imageAddForm.addEventListener("submit", handleAddImageFormSubmit);
 
-//--------------------MODAL CLOSE EVENT LOOPS-------------------->>
-closeButtons.forEach((button) => {
-  const modal = button.closest(".modal");
-  button.addEventListener("click", () => closeModal(modal));
-});
-
 //--------------------CLOSE MODALS WITH ESCAPE KEY-------------------->>
 modalList.forEach((modal) =>
   document.addEventListener("keydown", (evt) => {
     if (evt.key === "Escape") {
+      closeModal(modal);
+    }
+  })
+);
+
+//-----------------CLOSE MODALS WITH PRESS OUTSIDE OF MODAL---------------->>
+modalList.forEach((modal) =>
+  modal.addEventListener("mousedown", (evt) => {
+    if (
+      evt.target.classList.contains("modal") ||
+      evt.target.classList.contains("modal__close")
+    ) {
       closeModal(modal);
     }
   })
