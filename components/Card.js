@@ -5,7 +5,6 @@ class card {
     this._cardSelector = cardSelector;
     this.handleImageClick = handleImageClick;
   }
-  handleImageClick() {}
   _setEventListeners() {}
   _deleteCard() {}
   _likeCard() {}
