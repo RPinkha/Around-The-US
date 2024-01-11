@@ -78,10 +78,11 @@ function createCard(data) {
     //moved
     likeButton.classList.toggle("card__like-button_active"); //moved
   }); //moved
-  const trashButton = cardElement.querySelector(".card__trash-button");
+  const trashButton = cardElement.querySelector(".card__trash-button"); //moved
   trashButton.addEventListener("click", () => {
-    cardElement.remove();
-  });
+    //moved
+    cardElement.remove(); //moved
+  }); //moved
   cardImage.addEventListener("click", () => {
     previewImage.setAttribute("src", data.link);
     previewImage.setAttribute("alt", data.name);
