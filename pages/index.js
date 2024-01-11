@@ -73,10 +73,11 @@ function createCard(data) {
   cardTitle.textContent = data.name; //moved
   cardImage.setAttribute("src", data.link); //moved
   cardImage.setAttribute("alt", data.name); //moved
-  const likeButton = cardElement.querySelector(".card__like-button");
+  const likeButton = cardElement.querySelector(".card__like-button"); //moved
   likeButton.addEventListener("click", () => {
-    likeButton.classList.toggle("card__like-button_active");
-  });
+    //moved
+    likeButton.classList.toggle("card__like-button_active"); //moved
+  }); //moved
   const trashButton = cardElement.querySelector(".card__trash-button");
   trashButton.addEventListener("click", () => {
     cardElement.remove();
