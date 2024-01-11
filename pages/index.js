@@ -66,13 +66,13 @@ const previewImageTitle = modalImagePreview.querySelector(
 
 //------------------FUNCTION THAT CREATS CARDS------------------>>
 function createCard(data) {
-  const cardTemplate = document.querySelector("#card").content;
-  const cardElement = cardTemplate.querySelector(".card").cloneNode(true);
-  const cardTitle = cardElement.querySelector(".card__title");
-  const cardImage = cardElement.querySelector(".card__image");
-  cardTitle.textContent = data.name;
-  cardImage.setAttribute("src", data.link);
-  cardImage.setAttribute("alt", data.name);
+  const cardTemplate = document.querySelector("#card").content; //moved
+  const cardElement = cardTemplate.querySelector(".card").cloneNode(true); //moved
+  const cardTitle = cardElement.querySelector(".card__title"); //moved
+  const cardImage = cardElement.querySelector(".card__image"); //moved
+  cardTitle.textContent = data.name; //moved
+  cardImage.setAttribute("src", data.link); //moved
+  cardImage.setAttribute("alt", data.name); //moved
   const likeButton = cardElement.querySelector(".card__like-button");
   likeButton.addEventListener("click", () => {
     likeButton.classList.toggle("card__like-button_active");
