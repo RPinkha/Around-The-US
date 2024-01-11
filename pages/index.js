@@ -58,11 +58,12 @@ const modalImageLink = modalAddImage.querySelector(
 );
 
 //-----------------IMAGE PREVIEW MODAL ELEMENTS------------------>>
-const modalImagePreview = document.querySelector("#image-preview-modal");
-const previewImage = modalImagePreview.querySelector(".modal__image");
+const modalImagePreview = document.querySelector("#image-preview-modal"); //moved
+const previewImage = modalImagePreview.querySelector(".modal__image"); //moved
 const previewImageTitle = modalImagePreview.querySelector(
-  ".modal__image-title"
-);
+  //moved
+  ".modal__image-title" //moved
+); //moved
 
 //------------------FUNCTION THAT CREATS CARDS------------------>>
 function createCard(data) {
@@ -84,11 +85,12 @@ function createCard(data) {
     cardElement.remove(); //moved
   }); //moved
   cardImage.addEventListener("click", () => {
-    previewImage.setAttribute("src", data.link);
-    previewImage.setAttribute("alt", data.name);
-    previewImageTitle.textContent = data.name;
-    openModal(modalImagePreview);
-  });
+    //moved
+    previewImage.setAttribute("src", data.link); //moved
+    previewImage.setAttribute("alt", data.name); //moved
+    previewImageTitle.textContent = data.name; //moved
+    openModal(modalImagePreview); //moved
+  }); //moved
   return cardElement;
 }
 

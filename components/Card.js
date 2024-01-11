@@ -1,3 +1,9 @@
+const modalImagePreview = document.querySelector("#image-preview-modal");
+const previewImage = modalImagePreview.querySelector(".modal__image");
+const previewImageTitle = modalImagePreview.querySelector(
+  ".modal__image-title"
+);
+
 class card {
   //---------------------------CARD CONSTRUCTOR------------------------------->>
   constructor(data, cardSelector, handleImageClick) {
@@ -17,7 +23,16 @@ class card {
     return cardElement;
   }
 
-  _setEventListeners() {}
+  //-----------METHOD TO ADD EVENT LISTENERS ASSOCIATED WITH THE CARD----------->>
+  _setEventListeners() {
+    //-----------IMAGE ELEMENT CLICK EVENT LISTENER----------->>
+    this._imageElement.addEventListener("click", () => {
+      previewImage.setAttribute("src", data.link);
+      previewImage.setAttribute("alt", data.name);
+      previewImageTitle.textContent = data.name;
+      openModal(modalImagePreview);
+    });
+  }
 
   //-----------METHOD TO ADD FUNCTIONALITY TO THE CARD TRASH BUTTON----------->>
   _deleteCard() {
@@ -38,15 +53,14 @@ class card {
   //--------------METHOD TO POPULATE THE CARD ELEMENT------------------------>>
   generateCard() {
     this._element = this._getTemplate();
+    this._imageElement = this._element.querySelector(".card__image");
     this._setEventListeners();
     this._likeCard();
     this._deleteCard();
 
-    this._imageElement = this._element.querySelector(".card__image");
     this._imageElement.setAttribute("src", this._link);
     this._imageElement.setAttribute("alt", this._name);
     this._element.querySelector(".card__title").textContent = this._name;
-
     return this._element;
   }
 }
