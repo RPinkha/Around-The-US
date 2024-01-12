@@ -1,4 +1,4 @@
-import Card from "../components/Card";
+import Card from "../components/Card.js";
 
 const initialCards = [
   {
@@ -26,21 +26,6 @@ const initialCards = [
     link: "https://www.montereybaysuites.com/wp-content/uploads/2023/01/myrtle-beach-shoreline-1184735168.jpg",
   },
 ];
-
-//----ITERATE OVER INITIAL CARDS ARRAY, AND MAKE THEM USING CARD CLASS------->>
-initialCards.forEach((cardData) => {
-  const card = new Card(cardData, "#card", handleImageClick);
-  const cardElement = card.generateCard();
-  cardsContainer.append(cardElement);
-});
-
-//--------IMAGE CLICK HANDLER FUNCTION TO POPULATE PREVIEW MODAL------------->>
-function handleImageClick(data) {
-  previewImage.setAttribute("src", data.link);
-  previewImage.setAttribute("alt", data.name);
-  previewImageTitle.textContent = data.name;
-  openModal(modalImagePreview);
-}
 
 //--------------------SELECT CARDS CONTAINER-------------------->>
 const cardsContainer = document.querySelector(".cards__list");
@@ -80,6 +65,21 @@ const previewImage = modalImagePreview.querySelector(".modal__image");
 const previewImageTitle = modalImagePreview.querySelector(
   ".modal__image-title"
 );
+
+//--------IMAGE CLICK HANDLER FUNCTION TO POPULATE PREVIEW MODAL------------->>
+function handleImageClick(data) {
+  previewImage.setAttribute("src", data.link);
+  previewImage.setAttribute("alt", data.name);
+  previewImageTitle.textContent = data.name;
+  openModal(modalImagePreview);
+}
+
+//----ITERATE OVER INITIAL CARDS ARRAY, AND MAKE THEM USING CARD CLASS------->>
+initialCards.forEach((cardData) => {
+  const card = new Card(cardData, "#card", handleImageClick);
+  const cardElement = card.generateCard();
+  cardsContainer.append(cardElement);
+});
 
 //---------------CLOSE MODALS WITH ESCAPE KEY FUNCTIONS--------------->>
 function closeModalByEscape(evt) {
