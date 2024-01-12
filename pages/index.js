@@ -30,9 +30,12 @@ const initialCards = [
 //----ITERATE OVER INITIAL CARDS ARRAY, AND MAKE THEM USING CARD CLASS------->>
 initialCards.forEach((cardData) => {
   const card = new Card(cardData, "#card", handleImageClick);
+  const cardElement = card.generateCard();
+  cardsContainer.append(cardElement);
 });
 
-function handleImageClick(name, link) {
+//--------IMAGE CLICK HANDLER FUNCTION TO POPULATE PREVIEW MODAL------------->>
+function handleImageClick(data) {
   previewImage.setAttribute("src", data.link);
   previewImage.setAttribute("alt", data.name);
   previewImageTitle.textContent = data.name;
@@ -77,41 +80,6 @@ const previewImage = modalImagePreview.querySelector(".modal__image");
 const previewImageTitle = modalImagePreview.querySelector(
   ".modal__image-title"
 );
-
-//------------------FUNCTION THAT CREATS CARDS------------------>>
-function createCard(data) {
-  const cardTemplate = document.querySelector("#card").content; //moved
-  const cardElement = cardTemplate.querySelector(".card").cloneNode(true); //moved
-  const cardTitle = cardElement.querySelector(".card__title"); //moved
-  const cardImage = cardElement.querySelector(".card__image"); //moved
-  cardTitle.textContent = data.name; //moved
-  cardImage.setAttribute("src", data.link); //moved
-  cardImage.setAttribute("alt", data.name); //moved
-  const likeButton = cardElement.querySelector(".card__like-button"); //moved
-  likeButton.addEventListener("click", () => {
-    //moved
-    likeButton.classList.toggle("card__like-button_active"); //moved
-  }); //moved
-  const trashButton = cardElement.querySelector(".card__trash-button"); //moved
-  trashButton.addEventListener("click", () => {
-    //moved
-    cardElement.remove(); //moved
-  }); //moved
-  cardImage.addEventListener("click", () => {
-    //moved
-    previewImage.setAttribute("src", data.link); //moved
-    previewImage.setAttribute("alt", data.name); //moved
-    previewImageTitle.textContent = data.name; //moved
-    openModal(modalImagePreview); //moved
-  }); //moved
-  return cardElement;
-}
-
-//--------------------ADDING INITIAL CARDS------------------------>>
-initialCards.forEach((item) => {
-  const card = createCard(item);
-  cardsContainer.append(card);
-});
 
 //---------------CLOSE MODALS WITH ESCAPE KEY FUNCTIONS--------------->>
 function closeModalByEscape(evt) {
@@ -158,8 +126,9 @@ function handleAddImageFormSubmit(evt) {
   const userCard = {};
   userCard["name"] = modalImageTitle.value;
   userCard["link"] = modalImageLink.value;
-  const card = createCard(userCard);
-  cardsContainer.prepend(card);
+  const card = new Card(userCard, "#card", handleImageClick);
+  const cardElement = card.generateCard();
+  cardsContainer.prepend(cardElement);
   imageAddForm.reset();
   closeModal(modalAddImage);
 }
