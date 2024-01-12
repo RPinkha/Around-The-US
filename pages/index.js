@@ -67,10 +67,10 @@ const previewImageTitle = modalImagePreview.querySelector(
 );
 
 //--------IMAGE CLICK HANDLER FUNCTION TO POPULATE PREVIEW MODAL------------->>
-function handleImageClick(data) {
-  previewImage.setAttribute("src", data.link);
-  previewImage.setAttribute("alt", data.name);
-  previewImageTitle.textContent = data.name;
+function handleImageClick(name, link) {
+  previewImage.setAttribute("src", link);
+  previewImage.setAttribute("alt", name);
+  previewImageTitle.textContent = name;
   openModal(modalImagePreview);
 }
 

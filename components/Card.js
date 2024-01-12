@@ -26,7 +26,7 @@ export default class Card {
 
     //-----------LIKE BUTTON CLICK EVENT LISTENER------------>>
     this._likeButton.addEventListener("click", () => {
-      this._likeCard;
+      this._likeCard();
     });
 
     //-----------TRASH BUTTON CLICK EVENT LISTENER----------->>
