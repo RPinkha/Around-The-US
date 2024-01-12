@@ -1,3 +1,5 @@
+import Card from "../components/Card";
+
 const initialCards = [
   {
     name: "Yosemite Valley",
@@ -24,6 +26,18 @@ const initialCards = [
     link: "https://www.montereybaysuites.com/wp-content/uploads/2023/01/myrtle-beach-shoreline-1184735168.jpg",
   },
 ];
+
+//----ITERATE OVER INITIAL CARDS ARRAY, AND MAKE THEM USING CARD CLASS------->>
+initialCards.forEach((cardData) => {
+  const card = new Card(cardData, "#card", handleImageClick);
+});
+
+function handleImageClick(name, link) {
+  previewImage.setAttribute("src", data.link);
+  previewImage.setAttribute("alt", data.name);
+  previewImageTitle.textContent = data.name;
+  openModal(modalImagePreview);
+}
 
 //--------------------SELECT CARDS CONTAINER-------------------->>
 const cardsContainer = document.querySelector(".cards__list");
@@ -58,12 +72,11 @@ const modalImageLink = modalAddImage.querySelector(
 );
 
 //-----------------IMAGE PREVIEW MODAL ELEMENTS------------------>>
-const modalImagePreview = document.querySelector("#image-preview-modal"); //moved
-const previewImage = modalImagePreview.querySelector(".modal__image"); //moved
+const modalImagePreview = document.querySelector("#image-preview-modal");
+const previewImage = modalImagePreview.querySelector(".modal__image");
 const previewImageTitle = modalImagePreview.querySelector(
-  //moved
-  ".modal__image-title" //moved
-); //moved
+  ".modal__image-title"
+);
 
 //------------------FUNCTION THAT CREATS CARDS------------------>>
 function createCard(data) {
