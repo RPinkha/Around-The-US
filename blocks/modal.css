@@ -173,15 +173,7 @@
     height: 30px;
   }
 
-  .modal__save {
-    width: 238px;
-    font-size: 14px;
-    line-height: 17px;
-    height: 46px;
-    margin-top: 15px;
-  }
-
-  .modal__create {
+  .modal__button {
     width: 238px;
     font-size: 14px;
     line-height: 17px;
