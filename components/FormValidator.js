@@ -78,6 +78,17 @@ export default class FormValidator {
     });
   }
 
+  //-----------------METHOD TO RECHECK VALIDATION------------------>>
+  checkValidity() {
+    const inputList = Array.from(
+      this._formElement.querySelectorAll(this._inputSelector)
+    );
+    inputList.forEach((inputElement) => {
+      this._checkInputValidity(inputElement);
+      this._toggleButtonState(inputList);
+    });
+  }
+
   //------------------------METHOD TO ENABLE VALIDATION----------------------->>
   enableValidation() {
     this._setEventListeners();
@@ -87,5 +98,10 @@ export default class FormValidator {
   disableSubmit() {
     this._buttonElement.classList.add(this._inactiveButtonClass);
     this._buttonElement.setAttribute("disabled", true);
+  }
+
+  //-----------------METHOD TO RESET THE FORM------------------>>
+  formReset() {
+    this._formElement.reset();
   }
 }

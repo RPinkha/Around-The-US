@@ -147,15 +147,16 @@ function handleAddImageFormSubmit(evt) {
   const card = new Card(userCard, "#card", handleImageClick);
   const cardElement = card.generateCard();
   cardsContainer.prepend(cardElement);
-  imageAddForm.reset();
+  addCardFormValidation.formReset();
   addCardFormValidation.disableSubmit();
   closeModal(modalAddImage);
 }
 
 //--------------------PROFILE EDIT MODAL EVENTS-------------------->>
 editButton.addEventListener("click", () => {
-  openModal(modalProfileEdit);
   fillProfileInputs();
+  profileFormValidation.checkValidity();
+  openModal(modalProfileEdit);
 });
 profileForm.addEventListener("submit", handleProfileFormSubmit);
 
