@@ -28,10 +28,6 @@ const initialCards = [
   },
 ];
 
-//---------------FORMSELECTORS FOR EACH FORM--------------->>
-const profileEditModalID = "#modal-profile-edit";
-const addCardModalID = "#modal-add-card";
-
 //--------------------CONFIG OBJECT-------------------->>
 const config = {
   inputSelector: ".modal__input",
@@ -40,14 +36,6 @@ const config = {
   inputErrorClass: "modal__input_type_error",
   errorClass: "modal__error_active",
 };
-
-//--------------VALIDATION FOR EDIT PROFILE FORM----------------->>
-const profileFormValidation = new FormValidator(profileEditModalID, config);
-profileFormValidation.enableValidation();
-
-//-----------------VALIDATION FOR ADD CARD FORM-------------------->>
-const addCardFormValidation = new FormValidator(addCardModalID, config);
-addCardFormValidation.enableValidation();
 
 //--------------------SELECT CARDS CONTAINER-------------------->>
 const cardsContainer = document.querySelector(".cards__list");
@@ -87,6 +75,14 @@ const previewImage = modalImagePreview.querySelector(".modal__image");
 const previewImageTitle = modalImagePreview.querySelector(
   ".modal__image-title"
 );
+
+//--------------VALIDATION FOR EDIT PROFILE FORM----------------->>
+const profileFormValidation = new FormValidator(profileForm, config);
+profileFormValidation.enableValidation();
+
+//-----------------VALIDATION FOR ADD CARD FORM-------------------->>
+const addCardFormValidation = new FormValidator(imageAddForm, config);
+addCardFormValidation.enableValidation();
 
 //--------IMAGE CLICK HANDLER FUNCTION TO POPULATE PREVIEW MODAL------------->>
 function handleImageClick(name, link) {

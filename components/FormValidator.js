@@ -1,7 +1,7 @@
 export default class FormValidator {
   //------------------FORM VALIDATOR CONSTRUCTOR--------------------------->>
   constructor(
-    formSelector,
+    formElement,
     {
       inputSelector,
       submitButtonSelector,
@@ -10,7 +10,7 @@ export default class FormValidator {
       errorClass,
     }
   ) {
-    this._formSelector = formSelector;
+    this._formElement = formElement;
     this._inputSelector = inputSelector;
     this._submitButtonSelector = submitButtonSelector;
     this._inactiveButtonClass = inactiveButtonClass;
@@ -80,7 +80,6 @@ export default class FormValidator {
 
   //------------------------METHOD TO ENABLE VALIDATION----------------------->>
   enableValidation() {
-    this._formElement = document.querySelector(this._formSelector);
     this._setEventListeners();
   }
 
