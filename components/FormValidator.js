@@ -77,4 +77,9 @@ export default class FormValidator {
     this._formElement = document.querySelector(this._formSelector);
     this._setEventListeners();
   }
+
+  disableSubmit() {
+    this._buttonElement.classList.add(this._inactiveButtonClass);
+    this._buttonElement.setAttribute("disabled", true);
+  }
 }
