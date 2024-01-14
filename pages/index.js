@@ -1,6 +1,7 @@
 import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
 
+//--------------------OBJECT WITH INITIAL CARDS-------------------->>
 const initialCards = [
   {
     name: "Yosemite Valley",
@@ -28,13 +29,14 @@ const initialCards = [
   },
 ];
 
-//--------------------CONFIG OBJECT-------------------->>
+//--------------------OBJECT WITH CONFIG SETTINGS-------------------->>
 const config = {
   inputSelector: ".modal__input",
   submitButtonSelector: ".modal__button",
   inactiveButtonClass: "modal__button_disabled",
   inputErrorClass: "modal__input_type_error",
   errorClass: "modal__error_active",
+  formSelector: ".modal__form",
 };
 
 //--------------------SELECT CARDS CONTAINER-------------------->>
@@ -76,13 +78,20 @@ const previewImageTitle = modalImagePreview.querySelector(
   ".modal__image-title"
 );
 
+//-----------------FORM VALIDATOR CREATOR------------------>>
+const formList = Array.from(document.querySelectorAll(config.formSelector));
+const formValidators = {};
+formList.forEach((form) => {
+  const validator = new FormValidator(form, config);
+  const formName = form.getAttribute("name");
+  formValidators[formName] = validator;
+});
+
 //--------------VALIDATION FOR EDIT PROFILE FORM----------------->>
-const profileFormValidation = new FormValidator(profileForm, config);
-profileFormValidation.enableValidation();
+formValidators.profileForm.enableValidation();
 
 //-----------------VALIDATION FOR ADD CARD FORM-------------------->>
-const addCardFormValidation = new FormValidator(imageAddForm, config);
-addCardFormValidation.enableValidation();
+formValidators.addCardForm.enableValidation();
 
 //--------IMAGE CLICK HANDLER FUNCTION TO POPULATE PREVIEW MODAL------------->>
 function handleImageClick(name, link) {
@@ -92,11 +101,16 @@ function handleImageClick(name, link) {
   openModal(modalImagePreview);
 }
 
-//----ITERATE OVER INITIAL CARDS ARRAY, AND MAKE THEM USING CARD CLASS------->>
-initialCards.forEach((cardData) => {
+//--------RENDER CARD FUNCTION------------->>
+function renderCard(cardData) {
   const card = new Card(cardData, "#card", handleImageClick);
   const cardElement = card.generateCard();
-  cardsContainer.append(cardElement);
+  cardsContainer.prepend(cardElement);
+}
+
+//----ITERATE OVER INITIAL CARDS IN REVERSE, RENDER THEM USING FUNCTION------->>
+initialCards.reverse().forEach((cardData) => {
+  renderCard(cardData);
 });
 
 //---------------CLOSE MODALS WITH ESCAPE KEY FUNCTIONS--------------->>
@@ -144,18 +158,16 @@ function handleAddImageFormSubmit(evt) {
   const userCard = {};
   userCard["name"] = modalImageTitle.value;
   userCard["link"] = modalImageLink.value;
-  const card = new Card(userCard, "#card", handleImageClick);
-  const cardElement = card.generateCard();
-  cardsContainer.prepend(cardElement);
-  addCardFormValidation.formReset();
-  addCardFormValidation.disableSubmit();
+  renderCard(userCard);
+  formValidators.addCardForm.formReset();
+  formValidators.addCardForm.disableSubmit();
   closeModal(modalAddImage);
 }
 
 //--------------------PROFILE EDIT MODAL EVENTS-------------------->>
 editButton.addEventListener("click", () => {
   fillProfileInputs();
-  profileFormValidation.checkValidity();
+  formValidators.profileForm.checkValidity();
   openModal(modalProfileEdit);
 });
 profileForm.addEventListener("submit", handleProfileFormSubmit);
