@@ -152,6 +152,7 @@ function handleAddImageFormSubmit(evt) {
   const cardElement = card.generateCard();
   cardsContainer.prepend(cardElement);
   imageAddForm.reset();
+  addCardFormValidation.disableSubmit();
   closeModal(modalAddImage);
 }
 
