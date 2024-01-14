@@ -31,7 +31,6 @@ const initialCards = [
 //---------------FORMSELECTORS FOR EACH FORM--------------->>
 const profileEditModalID = "#modal-profile-edit";
 const addCardModalID = "#modal-add-card";
-const imagePreviewModalID = "#image-preview-modal";
 
 //--------------------CONFIG OBJECT-------------------->>
 const config = {
@@ -42,9 +41,13 @@ const config = {
   errorClass: "modal__error_active",
 };
 
-//-----------------VALIDATION FOR PROFILE FORM-------------------->>
+//--------------VALIDATION FOR EDIT PROFILE FORM----------------->>
 const profileFormValidation = new FormValidator(profileEditModalID, config);
 profileFormValidation.enableValidation();
+
+//-----------------VALIDATION FOR ADD CARD FORM-------------------->>
+const addCardFormValidation = new FormValidator(addCardModalID, config);
+addCardFormValidation.enableValidation();
 
 //--------------------SELECT CARDS CONTAINER-------------------->>
 const cardsContainer = document.querySelector(".cards__list");
