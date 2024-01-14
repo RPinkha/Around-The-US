@@ -28,6 +28,24 @@ const initialCards = [
   },
 ];
 
+//---------------FORMSELECTORS FOR EACH FORM--------------->>
+const profileEditModalID = "#modal-profile-edit";
+const addCardModalID = "#modal-add-card";
+const imagePreviewModalID = "#image-preview-modal";
+
+//--------------------CONFIG OBJECT-------------------->>
+const config = {
+  inputSelector: ".modal__input",
+  submitButtonSelector: ".modal__button",
+  inactiveButtonClass: "modal__button_disabled",
+  inputErrorClass: "modal__input_type_error",
+  errorClass: "modal__error_active",
+};
+
+//-----------------VALIDATION FOR PROFILE FORM-------------------->>
+const profileFormValidation = new FormValidator(profileEditModalID, config);
+profileFormValidation.enableValidation();
+
 //--------------------SELECT CARDS CONTAINER-------------------->>
 const cardsContainer = document.querySelector(".cards__list");
 
