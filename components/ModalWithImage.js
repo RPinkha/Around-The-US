@@ -5,7 +5,7 @@ export default class ModalWithImage extends Modal {
     super(modalSelector);
   }
 
-  opend({ name, link }) {
+  open({ name, link }) {
     this._previewImage = modalImagePreview.querySelector(".modal__image");
     previewImage.setAttribute("src", link);
     previewImage.setAttribute("alt", name);
