@@ -1,12 +1,14 @@
 import Modal from "./Modal.js";
 
 export default class ModalWithImage extends Modal {
+  //---------------MODALWITHIMAGE CONSTRUCTOR------------------------>>
   constructor(modalSelector) {
     super(modalSelector);
     this._previewImage = this._modal.querySelector(".modal__image");
     this._previewImageTitle = this._modal.querySelector(".modal__image-title");
   }
 
+  //------------ADDS FUNCTIONALITY TO THE OPEN METHOD-------------->>
   open({ name, link }) {
     this._previewImage.setAttribute("src", link);
     this._previewImage.setAttribute("alt", name);

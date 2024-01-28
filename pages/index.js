@@ -1,11 +1,15 @@
 import Card from "../components/Card.js";
+import Section from "../components/Section.js";
 import FormValidator from "../components/FormValidator.js";
 import ModalWithForm from "../components/ModalWithForm.js";
 import ModalWithImage from "../components/ModalWithImage.js";
 import { initialCards, config } from "../utils/constants.js";
 
 //--------------------SELECT CARDS CONTAINER-------------------->>
-const cardsContainer = document.querySelector(".cards__list");
+const cardContainer = new Section(
+  { items: initialCards, renderer: renderCard },
+  ".cards__list"
+);
 
 //--------------------SELECT ALL CLOSE BUTTONS ELEMENTS-------------------->>
 const modalList = Array.from(document.querySelectorAll(".modal"));

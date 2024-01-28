@@ -3,14 +3,16 @@ export default class Section {
   constructor({ items, renderer }, classSelector) {
     this._items = items;
     this._renderer = renderer;
-    this._classSelector = classSelector;
+    this._container = document.querySelector(classSelector);
   }
   //--------METHOD THAT ITTERATES OVER THE ITEMS ARRAY AND RENDERS THEM---------->>
   rendererItems = () => {
     this._items.forEach((item) => {
-      this._renderer(item);
+      this.addItem(this._renderer(item));
     });
   };
   //-------METHOD THAT TAKES A DOM ELEMENT AND ADDS IT TO THE CONTAINER---------->>
-  addItem = () => {};
+  addItem = (element) => {
+    this._container.prepend(element);
+  };
 }
