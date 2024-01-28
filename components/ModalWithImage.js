@@ -7,9 +7,12 @@ export default class ModalWithImage extends Modal {
 
   open({ name, link }) {
     this._previewImage = modalImagePreview.querySelector(".modal__image");
-    previewImage.setAttribute("src", link);
-    previewImage.setAttribute("alt", name);
-    previewImageTitle.textContent = name;
+    this._previewImage.setAttribute("src", link);
+    this._previewImage.setAttribute("alt", name);
+    this._previewImageTitle = this._previewImage.querySelector(
+      ".modal__image-title"
+    );
+    this._previewImageTitle.textContent = name;
     super.open();
   }
 }
