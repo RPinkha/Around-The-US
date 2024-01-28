@@ -6,7 +6,9 @@ export default class ModalWithForm extends Modal {
     this._formSubmit = formSubmit;
   }
 
-  open() {
-    super.open();
-  }
+  _getInputValues = () => {};
+
+  setEventListeners = () => {
+    super.setEventListeners();
+  };
 }
