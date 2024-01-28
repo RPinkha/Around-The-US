@@ -1,5 +1,7 @@
 import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
+import ModalWithForm from "../components/ModalWithForm.js";
+import ModalWithImage from "../components/ModalWithImage.js";
 import { initialCards, config } from "../utils/constants.js";
 
 //--------------------SELECT CARDS CONTAINER-------------------->>
@@ -75,33 +77,6 @@ function renderCard(cardData) {
 initialCards.reverse().forEach((cardData) => {
   renderCard(cardData);
 });
-
-//---------------CLOSE MODALS WITH ESCAPE KEY FUNCTIONS--------------->>
-function closeModalByEscape(evt) {
-  if (evt.key === "Escape") {
-    const openedModal = document.querySelector(".modal_opened");
-    closeModal(openedModal);
-  }
-}
-
-//---------------CLOSE MODALS PRESSING OUTSIDE OF MODAL--------------->>
-function closeModalOnRemoteClick(evt) {
-  if (evt.target === evt.currentTarget) {
-    closeModal(evt.currentTarget);
-  }
-}
-
-//--------------------OPEN AND CLOSE MODAL FUNCTIONS-------------------->>
-function openModal(modal) {
-  modal.classList.add("modal_opened");
-  document.addEventListener("keydown", closeModalByEscape);
-  modal.addEventListener("mousedown", closeModalOnRemoteClick);
-}
-function closeModal(modal) {
-  modal.classList.remove("modal_opened");
-  document.removeEventListener("keydown", closeModalByEscape);
-  modal.removeEventListener("mousedown", closeModalOnRemoteClick);
-}
 
 //--------------------PROFILE EDIT MODAL FUNCTIONS-------------------->>
 function fillProfileInputs() {
