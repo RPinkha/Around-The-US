@@ -7,7 +7,7 @@ export default class Section {
   }
   //--------METHOD THAT ITTERATES OVER THE ITEMS ARRAY AND RENDERS THEM---------->>
   rendererItems = () => {
-    this._items.forEach((item) => {
+    this._items.reverse().forEach((item) => {
       this.addItem(this._renderer(item));
     });
   };

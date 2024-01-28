@@ -5,11 +5,33 @@ import ModalWithForm from "../components/ModalWithForm.js";
 import ModalWithImage from "../components/ModalWithImage.js";
 import { initialCards, config } from "../utils/constants.js";
 
-//--------------------SELECT CARDS CONTAINER-------------------->>
-const cardContainer = new Section(
+//-----------------------RENDER CARD FUNCTION----------------------->>
+function renderCard(cardData) {
+  const card = new Card(cardData, "#card", handleImageClick);
+  return card.generateCard();
+}
+
+//-----------CREATE A NEW CLASS INSTANCE FOR THE CARDS CONTAINER------------>>
+const cardsContainer = new Section(
   { items: initialCards, renderer: renderCard },
   ".cards__list"
 );
+
+//----------------CALL RENDERER METHOD ON CARDSCONTAINER------------------->>
+cardsContainer.rendererItems();
+
+const profileEditModal = new ModalWithForm(
+  "#modal-profile-edit",
+  handleProfileFormSubmit(),
+  config
+);
+
+function handleProfileFormSubmit(evt) {
+  evt.preventDefault();
+  profileName.textContent = profileNameInput.value;
+  profileDescription.textContent = profileDescriptionInput.value;
+  closeModal(modalProfileEdit);
+}
 
 //--------------------SELECT ALL CLOSE BUTTONS ELEMENTS-------------------->>
 const modalList = Array.from(document.querySelectorAll(".modal"));
@@ -70,28 +92,10 @@ function handleImageClick(name, link) {
   openModal(modalImagePreview);
 }
 
-//--------RENDER CARD FUNCTION------------->>
-function renderCard(cardData) {
-  const card = new Card(cardData, "#card", handleImageClick);
-  const cardElement = card.generateCard();
-  cardsContainer.prepend(cardElement);
-}
-
-//----ITERATE OVER INITIAL CARDS IN REVERSE, RENDER THEM USING FUNCTION------->>
-initialCards.reverse().forEach((cardData) => {
-  renderCard(cardData);
-});
-
 //--------------------PROFILE EDIT MODAL FUNCTIONS-------------------->>
 function fillProfileInputs() {
   profileNameInput.value = profileName.textContent;
   profileDescriptionInput.value = profileDescription.textContent;
-}
-function handleProfileFormSubmit(evt) {
-  evt.preventDefault();
-  profileName.textContent = profileNameInput.value;
-  profileDescription.textContent = profileDescriptionInput.value;
-  closeModal(modalProfileEdit);
 }
 
 //--------------------ADD IMAGE MODAL FUNCTIONS-------------------->>
