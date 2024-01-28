@@ -1,11 +1,11 @@
 export default class Modal {
   //------------------MODAL CONSTRUCTOR--------------------------->>
   constructor(modalSelector) {
-    this._popupElement = document.querySelector(modalSelector);
+    this._modal = document.querySelector(modalSelector);
   }
   //--------METHOD THAT ITTERATES OVER THE ITEMS ARRAY AND RENDERS THEM---------->>
   open = () => {
-    this._popupElement.classList.add("modal_opened");
+    this._modalElement.classList.add("modal_opened");
     document.addEventListener("keyup", this._handleEscClose);
   };
   //-------METHOD THAT TAKES A DOM ELEMENT AND ADDS IT TO THE CONTAINER---------->>
@@ -20,5 +20,13 @@ export default class Modal {
     }
   };
   //-----METHOD THAT ADDS A CLICK EVENT LISTENER TO THE CLOSE ICON------>>
-  setEventListeners = () => {};
+  setEventListeners = () => {
+    this._closeButton = this._popupElement.querySelector(".modal__close");
+    this._closeButton.addEventListener("click", () => this.close());
+    this._modal.addEventListener("mousedown", (evt) => {
+      if (evt.target === evt.currentTarget) {
+        this.close();
+      }
+    });
+  };
 }
