@@ -55,6 +55,7 @@ formValidators.addCardForm.enableValidation();
 
 //-----------------------RENDER CARD FUNCTION----------------------->>
 function renderCard(cardData) {
+  console.log(cardData);
   const card = new Card(cardData, "#card", handleImageClick);
   return card.generateCard();
 }
@@ -75,10 +76,25 @@ const profileEditModal = new ModalWithForm(
   config
 );
 
+const addImageModal = new ModalWithForm(
+  "#modal-add-card",
+  handleAddImageFormSubmit,
+  config
+);
+
 //-----------CREATE A FUNCTION THAT HANDLES PROFILE EDIT SUBMIT------------>>
 function handleProfileFormSubmit(values) {
   userInfo.setUserInfo(values);
   profileEditModal.close();
+}
+
+//------------CREATE A FUNCTION THAT HANDLES ADD IMAGE SUBMIT---------->>
+function handleAddImageFormSubmit(values) {
+  const newCard = renderCard(values);
+  cardsContainer.addItem(newCard);
+  formValidators.addCardForm.formReset();
+  formValidators.addCardForm.disableSubmit();
+  addImageModal.close();
 }
 
 //---------PROFILE EDIT MODAL FILL INPUTS FUNCTIONS----------------->>
@@ -95,8 +111,14 @@ editButton.addEventListener("click", () => {
   profileEditModal.open();
 });
 
+//-----------ADD A CLICK EVENT LISTENER TO THE ADD BUTTON------------>>
+addButton.addEventListener("click", () => addImageModal.open());
+
 //-----------ADD EVENT LISTENERS TO THE EDIT PROFILE MODAL----------->>
 profileEditModal.setEventListeners();
+
+//-----------ADD EVENT LISTENERS TO THE ADD IMAGE MODAL----------->>
+addImageModal.setEventListeners();
 
 //--------IMAGE CLICK HANDLER FUNCTION TO POPULATE PREVIEW MODAL------------->>
 function handleImageClick(name, link) {
@@ -105,19 +127,3 @@ function handleImageClick(name, link) {
   previewImageTitle.textContent = name;
   openModal(modalImagePreview);
 }
-
-//--------------------ADD IMAGE MODAL FUNCTIONS-------------------->>
-function handleAddImageFormSubmit(evt) {
-  evt.preventDefault();
-  const userCard = {};
-  userCard["name"] = modalImageTitle.value;
-  userCard["link"] = modalImageLink.value;
-  renderCard(userCard);
-  formValidators.addCardForm.formReset();
-  formValidators.addCardForm.disableSubmit();
-  closeModal(modalAddImage);
-}
-
-//--------------------ADD IMAGE MODAL EVENTS-------------------->>
-addButton.addEventListener("click", () => openModal(modalAddImage));
-imageAddForm.addEventListener("submit", handleAddImageFormSubmit);
