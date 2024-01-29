@@ -3,19 +3,16 @@ import Section from "../components/Section.js";
 import FormValidator from "../components/FormValidator.js";
 import ModalWithForm from "../components/ModalWithForm.js";
 import ModalWithImage from "../components/ModalWithImage.js";
-import { initialCards, config } from "../utils/constants.js";
+import {
+  initialCards,
+  config,
+  editButton,
+  addButton,
+  profileInputList,
+  formList,
+  formValidators,
+} from "../utils/constants.js";
 import UserInfo from "../components/UserInfo.js";
-
-//--------------------PROFILE ELEMENTS-------------------->>
-const profile = document.querySelector(".profile");
-const editButton = profile.querySelector(".profile__edit-button");
-const addButton = profile.querySelector(".profile__add-button");
-
-//--------------------PROFILE EDIT MODAL ELEMENTS-------------------->>
-const modalProfileEdit = document.querySelector("#modal-profile-edit");
-const profileInputList = Array.from(
-  modalProfileEdit.querySelectorAll(".modal__input")
-);
 
 //-----------CREATE A NEW CLASS INSTANCE FOR THE USER INFO------------>>
 const userInfo = new UserInfo({
@@ -24,8 +21,6 @@ const userInfo = new UserInfo({
 });
 
 //-----------------FORM VALIDATOR CREATOR------------------>>
-const formList = Array.from(document.querySelectorAll(config.formSelector));
-const formValidators = {};
 formList.forEach((form) => {
   const validator = new FormValidator(form, config);
   const formName = form.getAttribute("name");
@@ -67,6 +62,7 @@ const addImageModal = new ModalWithForm(
   config
 );
 
+//-----------CREATE A MODALWITHIMAGE INSTANCE FOR THE PREVIEW IMAGE------------>>
 const previewModal = new ModalWithImage("#image-preview-modal");
 
 //-----------CREATE A FUNCTION THAT HANDLES PROFILE EDIT SUBMIT------------>>
