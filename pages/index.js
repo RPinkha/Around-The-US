@@ -6,16 +6,10 @@ import ModalWithImage from "../components/ModalWithImage.js";
 import { initialCards, config } from "../utils/constants.js";
 import UserInfo from "../components/UserInfo.js";
 
-//--------------------SELECT ALL CLOSE BUTTONS ELEMENTS-------------------->>
-const modalList = Array.from(document.querySelectorAll(".modal"));
-const closeButtons = document.querySelectorAll(".modal__close");
-
 //--------------------PROFILE ELEMENTS-------------------->>
 const profile = document.querySelector(".profile");
 const editButton = profile.querySelector(".profile__edit-button");
 const addButton = profile.querySelector(".profile__add-button");
-const profileName = profile.querySelector(".profile__name");
-const profileDescription = profile.querySelector(".profile__description");
 
 //--------------------ADD IMAGE MODAL ELEMENTS-------------------->>
 const modalAddImage = document.querySelector("#modal-add-card");
@@ -62,40 +56,38 @@ const profileEditModal = new ModalWithForm(
   config
 );
 
-function handleProfileFormSubmit(evt) {
-  evt.preventDefault();
-  const userCurrentInfo = userInfo.getUserInfo();
-  userInfo.setUserInfo(userCurrentInfo);
+function handleProfileFormSubmit(values) {
+  userInfo.setUserInfo(values);
   profileEditModal.close();
 }
 
 //--------------------PROFILE EDIT MODAL ELEMENTS-------------------->>
 const modalProfileEdit = document.querySelector("#modal-profile-edit");
-const profileForm = document.forms["profileForm"];
 const profileInputList = Array.from(
   modalProfileEdit.querySelectorAll(".modal__input")
 );
 
-//--------------------PROFILE EDIT MODAL FUNCTIONS-------------------->>
+//---------PROFILE EDIT MODAL FILL INPUTS FUNCTIONS----------------->>
 function fillProfileInputs() {
-  profileInputList[0].value = profileName.textContent;
-  profileInputList[1].value = profileDescription.textContent;
+  const userCurrentInfo = userInfo.getUserInfo();
+  profileInputList[0].value = userCurrentInfo.name;
+  profileInputList[1].value = userCurrentInfo.description;
 }
 
 //-----------CREATE A NEW CLASS INSTANCE FOR THE USER INFO------------>>
-const userInfo = new UserInfo(
-  {
-    nameSelector: ".profile__name",
-    descriptionSelector: ".profile__description",
-  },
-  profileInputList
-);
+const userInfo = new UserInfo({
+  nameSelector: ".profile__name",
+  descriptionSelector: ".profile__description",
+});
 
+//-----------ADD A CLICK EVENT LISTENER TO THE EDIT BUTTON------------>>
 editButton.addEventListener("click", () => {
   fillProfileInputs();
   formValidators.profileForm.checkValidity();
   profileEditModal.open();
 });
+
+//-----------ADD EVENT LISTENERS TO THE EDIT PROFILE MODAL----------->>
 profileEditModal.setEventListeners();
 
 //--------------VALIDATION FOR EDIT PROFILE FORM----------------->>
@@ -127,9 +119,3 @@ function handleAddImageFormSubmit(evt) {
 //--------------------ADD IMAGE MODAL EVENTS-------------------->>
 addButton.addEventListener("click", () => openModal(modalAddImage));
 imageAddForm.addEventListener("submit", handleAddImageFormSubmit);
-
-//--------------------MODAL CLOSE EVENT LOOP-------------------->>
-// closeButtons.forEach((button) => {
-//   const modal = button.closest(".modal");
-//   button.addEventListener("click", () => closeModal(modal));
-// });

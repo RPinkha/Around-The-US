@@ -1,17 +1,15 @@
 export default class UserInfo {
   //------------------USERINFO CONSTRUCTOR--------------------------->>
-  constructor({ nameSelector, descriptionSelector }, inputList) {
+  constructor({ nameSelector, descriptionSelector }) {
     this._nameElement = document.querySelector(nameSelector);
     this._descriptionElement = document.querySelector(descriptionSelector);
-    this._inputList = inputList;
   }
 
   //--------RETURNS AN OBJECT CONTAINING INFORMATION ABOUT THE USER---------->>
   getUserInfo() {
     const userCurrentInfo = {};
-    this._inputList.forEach((input) => {
-      userCurrentInfo[input.name] = input.textContent;
-    });
+    userCurrentInfo.name = this._nameElement.textContent;
+    userCurrentInfo.description = this._descriptionElement.textContent;
     return userCurrentInfo;
   }
 
