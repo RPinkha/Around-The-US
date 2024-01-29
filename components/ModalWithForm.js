@@ -4,7 +4,7 @@ export default class ModalWithForm extends Modal {
   //---------------MODALWITHFORM CONSTRUCTOR------------------------>>
   constructor(modalSelector, formSubmit, { formSelector }) {
     super(modalSelector);
-    this._form = this._modal.querySelector(formSelector);
+    this._form = this._modalElement.querySelector(formSelector);
     this._formSubmit = formSubmit;
   }
 
@@ -23,6 +23,6 @@ export default class ModalWithForm extends Modal {
       const values = this._getInputValues();
       this._formSubmit(values);
     });
-    super.setEventListeners();
+    super.setEventListeners;
   };
 }

@@ -4,8 +4,10 @@ export default class ModalWithImage extends Modal {
   //---------------MODALWITHIMAGE CONSTRUCTOR------------------------>>
   constructor(modalSelector) {
     super(modalSelector);
-    this._previewImage = this._modal.querySelector(".modal__image");
-    this._previewImageTitle = this._modal.querySelector(".modal__image-title");
+    this._previewImage = this._modalElement.querySelector(".modal__image");
+    this._previewImageTitle = this._modalElement.querySelector(
+      ".modal__image-title"
+    );
   }
 
   //------------ADDS FUNCTIONALITY TO THE OPEN METHOD-------------->>
@@ -13,6 +15,6 @@ export default class ModalWithImage extends Modal {
     this._previewImage.setAttribute("src", link);
     this._previewImage.setAttribute("alt", name);
     this._previewImageTitle.textContent = name;
-    super.open();
+    super.open;
   }
 }
