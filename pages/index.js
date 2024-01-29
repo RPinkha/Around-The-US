@@ -26,6 +26,18 @@ const previewImageTitle = modalImagePreview.querySelector(
   ".modal__image-title"
 );
 
+//--------------------PROFILE EDIT MODAL ELEMENTS-------------------->>
+const modalProfileEdit = document.querySelector("#modal-profile-edit");
+const profileInputList = Array.from(
+  modalProfileEdit.querySelectorAll(".modal__input")
+);
+
+//-----------CREATE A NEW CLASS INSTANCE FOR THE USER INFO------------>>
+const userInfo = new UserInfo({
+  nameSelector: ".profile__name",
+  descriptionSelector: ".profile__description",
+});
+
 //-----------------FORM VALIDATOR CREATOR------------------>>
 const formList = Array.from(document.querySelectorAll(config.formSelector));
 const formValidators = {};
@@ -34,6 +46,12 @@ formList.forEach((form) => {
   const formName = form.getAttribute("name");
   formValidators[formName] = validator;
 });
+
+//--------------VALIDATION FOR EDIT PROFILE FORM----------------->>
+formValidators.profileForm.enableValidation();
+
+//-----------------VALIDATION FOR ADD CARD FORM-------------------->>
+formValidators.addCardForm.enableValidation();
 
 //-----------------------RENDER CARD FUNCTION----------------------->>
 function renderCard(cardData) {
@@ -50,22 +68,18 @@ const cardsContainer = new Section(
 //----------------CALL RENDERER METHOD ON CARDSCONTAINER------------------->>
 cardsContainer.rendererItems();
 
+//-----------CREATE A MODALWITHFORM INSTANCE FOR THE PROFILE EDIT------------>>
 const profileEditModal = new ModalWithForm(
   "#modal-profile-edit",
   handleProfileFormSubmit,
   config
 );
 
+//-----------CREATE A FUNCTION THAT HANDLES PROFILE EDIT SUBMIT------------>>
 function handleProfileFormSubmit(values) {
   userInfo.setUserInfo(values);
   profileEditModal.close();
 }
-
-//--------------------PROFILE EDIT MODAL ELEMENTS-------------------->>
-const modalProfileEdit = document.querySelector("#modal-profile-edit");
-const profileInputList = Array.from(
-  modalProfileEdit.querySelectorAll(".modal__input")
-);
 
 //---------PROFILE EDIT MODAL FILL INPUTS FUNCTIONS----------------->>
 function fillProfileInputs() {
@@ -73,12 +87,6 @@ function fillProfileInputs() {
   profileInputList[0].value = userCurrentInfo.name;
   profileInputList[1].value = userCurrentInfo.description;
 }
-
-//-----------CREATE A NEW CLASS INSTANCE FOR THE USER INFO------------>>
-const userInfo = new UserInfo({
-  nameSelector: ".profile__name",
-  descriptionSelector: ".profile__description",
-});
 
 //-----------ADD A CLICK EVENT LISTENER TO THE EDIT BUTTON------------>>
 editButton.addEventListener("click", () => {
@@ -89,12 +97,6 @@ editButton.addEventListener("click", () => {
 
 //-----------ADD EVENT LISTENERS TO THE EDIT PROFILE MODAL----------->>
 profileEditModal.setEventListeners();
-
-//--------------VALIDATION FOR EDIT PROFILE FORM----------------->>
-formValidators.profileForm.enableValidation();
-
-//-----------------VALIDATION FOR ADD CARD FORM-------------------->>
-formValidators.addCardForm.enableValidation();
 
 //--------IMAGE CLICK HANDLER FUNCTION TO POPULATE PREVIEW MODAL------------->>
 function handleImageClick(name, link) {
