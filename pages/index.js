@@ -11,21 +11,6 @@ const profile = document.querySelector(".profile");
 const editButton = profile.querySelector(".profile__edit-button");
 const addButton = profile.querySelector(".profile__add-button");
 
-//--------------------ADD IMAGE MODAL ELEMENTS-------------------->>
-const modalAddImage = document.querySelector("#modal-add-card");
-const imageAddForm = document.forms["addCardForm"];
-const modalImageTitle = modalAddImage.querySelector(".modal__input_type_title");
-const modalImageLink = modalAddImage.querySelector(
-  ".modal__input_type_image-link"
-);
-
-//-----------------IMAGE PREVIEW MODAL ELEMENTS------------------>>
-const modalImagePreview = document.querySelector("#image-preview-modal");
-const previewImage = modalImagePreview.querySelector(".modal__image");
-const previewImageTitle = modalImagePreview.querySelector(
-  ".modal__image-title"
-);
-
 //--------------------PROFILE EDIT MODAL ELEMENTS-------------------->>
 const modalProfileEdit = document.querySelector("#modal-profile-edit");
 const profileInputList = Array.from(
@@ -55,7 +40,6 @@ formValidators.addCardForm.enableValidation();
 
 //-----------------------RENDER CARD FUNCTION----------------------->>
 function renderCard(cardData) {
-  console.log(cardData);
   const card = new Card(cardData, "#card", handleImageClick);
   return card.generateCard();
 }
@@ -76,11 +60,14 @@ const profileEditModal = new ModalWithForm(
   config
 );
 
+//-----------CREATE A MODALWITHFORM INSTANCE FOR THE ADD IMAGE------------>>
 const addImageModal = new ModalWithForm(
   "#modal-add-card",
   handleAddImageFormSubmit,
   config
 );
+
+const previewModal = new ModalWithImage("#image-preview-modal");
 
 //-----------CREATE A FUNCTION THAT HANDLES PROFILE EDIT SUBMIT------------>>
 function handleProfileFormSubmit(values) {
@@ -95,6 +82,11 @@ function handleAddImageFormSubmit(values) {
   formValidators.addCardForm.formReset();
   formValidators.addCardForm.disableSubmit();
   addImageModal.close();
+}
+
+//--------IMAGE CLICK HANDLER FUNCTION TO POPULATE PREVIEW MODAL------------->>
+function handleImageClick(name, link) {
+  previewModal.open({ name, link });
 }
 
 //---------PROFILE EDIT MODAL FILL INPUTS FUNCTIONS----------------->>
@@ -120,10 +112,5 @@ profileEditModal.setEventListeners();
 //-----------ADD EVENT LISTENERS TO THE ADD IMAGE MODAL----------->>
 addImageModal.setEventListeners();
 
-//--------IMAGE CLICK HANDLER FUNCTION TO POPULATE PREVIEW MODAL------------->>
-function handleImageClick(name, link) {
-  previewImage.setAttribute("src", link);
-  previewImage.setAttribute("alt", name);
-  previewImageTitle.textContent = name;
-  openModal(modalImagePreview);
-}
+//-----------ADD EVENT LISTENERS TO THE PREVIEW IMAGE MODAL----------->>
+previewModal.setEventListeners();

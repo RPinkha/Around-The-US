@@ -5,10 +5,10 @@ export default class Modal {
   }
 
   //--------METHOD THAT ITTERATES OVER THE ITEMS ARRAY AND RENDERS THEM---------->>
-  open = () => {
+  open() {
     this._modalElement.classList.add("modal_opened");
     document.addEventListener("keyup", this._handleEscClose);
-  };
+  }
 
   //-------METHOD THAT TAKES A DOM ELEMENT AND ADDS IT TO THE CONTAINER---------->>
   close = () => {
