@@ -38,6 +38,7 @@ export default class Card {
   //-----------METHOD TO HANDLE CARD TRASH BUTTON CLICK----------->>
   _deleteCard() {
     this._element.remove();
+    this._element = null;
   }
 
   //-----------METHOD TO HANDLE CARD LIKE BUTTON CLICK----------->>

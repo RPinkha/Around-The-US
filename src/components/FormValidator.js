@@ -16,6 +16,12 @@ export default class FormValidator {
     this._inactiveButtonClass = inactiveButtonClass;
     this._inputErrorClass = inputErrorClass;
     this._errorClass = errorClass;
+    this._inputList = Array.from(
+      this._formElement.querySelectorAll(this._inputSelector)
+    );
+    this._buttonElement = this._formElement.querySelector(
+      this._submitButtonSelector
+    );
   }
 
   //-----------METHOD THAT SHOWS THE INPUT ERROR-------------->>
@@ -63,29 +69,20 @@ export default class FormValidator {
 
   //-----------METHOD THAT SETS EVENT LISTENERS ON THE INPUT ELEMENTS-------------->>
   _setEventListeners() {
-    const inputList = Array.from(
-      this._formElement.querySelectorAll(this._inputSelector)
-    );
-    this._buttonElement = this._formElement.querySelector(
-      this._submitButtonSelector
-    );
-    this._toggleButtonState(inputList);
-    inputList.forEach((inputElement) => {
+    this._toggleButtonState(this._inputList);
+    this._inputList.forEach((inputElement) => {
       inputElement.addEventListener("input", () => {
         this._checkInputValidity(inputElement);
-        this._toggleButtonState(inputList);
+        this._toggleButtonState(this._inputList);
       });
     });
   }
 
   //-----------------METHOD TO RECHECK VALIDATION------------------>>
   checkValidity() {
-    const inputList = Array.from(
-      this._formElement.querySelectorAll(this._inputSelector)
-    );
-    inputList.forEach((inputElement) => {
+    this._inputList.forEach((inputElement) => {
       this._checkInputValidity(inputElement);
-      this._toggleButtonState(inputList);
+      this._toggleButtonState(this._inputList);
     });
   }
 
@@ -101,7 +98,7 @@ export default class FormValidator {
   }
 
   //-----------------METHOD TO RESET THE FORM------------------>>
-  formReset() {
+  resetForm() {
     this._formElement.reset();
   }
 }

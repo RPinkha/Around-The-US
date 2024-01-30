@@ -21,18 +21,13 @@ const userInfo = new UserInfo({
   descriptionSelector: ".profile__description",
 });
 
-//-----------------FORM VALIDATOR CREATOR------------------>>
+//-----------------FORM VALIDATOR CREATOR AND ENABLING------------------>>
 formList.forEach((form) => {
   const validator = new FormValidator(form, config);
   const formName = form.getAttribute("name");
+  validator.enableValidation();
   formValidators[formName] = validator;
 });
-
-//--------------VALIDATION FOR EDIT PROFILE FORM----------------->>
-formValidators.profileForm.enableValidation();
-
-//-----------------VALIDATION FOR ADD CARD FORM-------------------->>
-formValidators.addCardForm.enableValidation();
 
 //-----------------------RENDER CARD FUNCTION----------------------->>
 function renderCard(cardData) {
@@ -76,7 +71,7 @@ function handleProfileFormSubmit(values) {
 function handleAddImageFormSubmit(values) {
   const newCard = renderCard(values);
   cardsContainer.addItem(newCard);
-  formValidators.addCardForm.formReset();
+  formValidators.addCardForm.resetForm();
   formValidators.addCardForm.disableSubmit();
   addImageModal.close();
 }
