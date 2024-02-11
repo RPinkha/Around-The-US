@@ -125,6 +125,28 @@
         </div>
       </div>
 
+      <!-- CHANGE PROFILE PICTURE MODAL -->
+      <div class="modal modal_opened" id="modal-cahnge-picture">
+        <div class="modal__container">
+          <button class="modal__close modal__close_type_form"></button>
+          <p class="modal__title">Change profile picture</p>
+          <form class="modal__form" name="changePictureForm" novalidate>
+            <label class="modal__label">
+              <input
+                type="url"
+                class="modal__input modal__input_type_image-link"
+                placeholder="Image link"
+                name="link"
+                id="card-url"
+                required
+              />
+              <span class="modal__error" id="card-url-error"></span>
+            </label>
+            <button class="modal__button" type="submit">Save</button>
+          </form>
+        </div>
+      </div>
+
       <!-- COMFIRM DELETE MODAL -->
       <div class="modal" id="modal-confirm-delete">
         <div class="modal__container">
