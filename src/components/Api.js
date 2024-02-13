@@ -88,6 +88,18 @@ export default class Api {
       this._checkResponse(res);
     });
   }
+
+  changeAvatar(link) {
+    fetch(`${this._baseUrl}/users/me/avatar`, {
+      method: "PATCH",
+      headers: this._headers,
+      body: JSON.stringify({
+        avatar: link,
+      }),
+    }).then((res) => {
+      this._checkResponse(res);
+    });
+  }
 }
 
-/// My autherization Token: 739decfe-71be-4d0d-8961-a71a0f6cba52
+// My autherization Token: 739decfe-71be-4d0d-8961-a71a0f6cba52
