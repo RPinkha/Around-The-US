@@ -26,6 +26,11 @@
             src="<%=require('./images/avatar.jpg')%>"
             alt="Avatar"
           />
+          <button
+            class="profile__photo-button"
+            type="button"
+            aria-label="edit profile photo"
+          ></button>
           <div class="profile__info">
             <h1 class="profile__name">Ruven Pinkhasov</h1>
             <button
@@ -126,7 +131,7 @@
       </div>
 
       <!-- CHANGE PROFILE PICTURE MODAL -->
-      <div class="modal modal_opened" id="modal-cahnge-picture">
+      <div class="modal" id="modal-cahnge-picture">
         <div class="modal__container">
           <button class="modal__close modal__close_type_form"></button>
           <p class="modal__title">Change profile picture</p>
