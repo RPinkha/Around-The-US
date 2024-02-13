@@ -4,6 +4,8 @@ import Section from "../components/Section.js";
 import FormValidator from "../components/FormValidator.js";
 import ModalWithForm from "../components/ModalWithForm.js";
 import ModalWithImage from "../components/ModalWithImage.js";
+import ModalWithConfirmation from "../components/ModalWithConfirmation.js";
+import Api from "../components/Api.js";
 import {
   initialCards,
   config,
@@ -16,6 +18,9 @@ import {
   options,
 } from "../utils/constants.js";
 import UserInfo from "../components/UserInfo.js";
+
+//-----------CREATE A NEW CLASS INSTANCE FOR THE API------------>>
+const api = new Api(options);
 
 //-----------CREATE A NEW CLASS INSTANCE FOR THE USER INFO------------>>
 const userInfo = new UserInfo({
@@ -46,6 +51,13 @@ const cardsContainer = new Section(
 //----------------CALL RENDERER METHOD ON CARDSCONTAINER------------------->>
 cardsContainer.rendererItems();
 
+//-----CREATE A MODALWITHCONFIRMATION INSTANCE FOR CARD DELETE CONFIRMATION------------>>
+const deleteConfirmationModal = new ModalWithConfirmation(
+  "#modal-confirm-delete",
+  handleDeleteCardSubmit,
+  config
+);
+
 //-----------CREATE A MODALWITHFORM INSTANCE FOR THE CHANGE PICTURE------------>>
 const avatarEditModal = new ModalWithForm(
   "#modal-change-picture",
@@ -69,6 +81,9 @@ const addImageModal = new ModalWithForm(
 
 //-----------CREATE A MODALWITHIMAGE INSTANCE FOR THE PREVIEW IMAGE------------>>
 const previewModal = new ModalWithImage("#image-preview-modal");
+
+//-----------CREATE A FUNCTION THAT HANDLES CARD DELETE------------>>
+function handleDeleteCardSubmit() {}
 
 //-----------CREATE A FUNCTION THAT HANDLES AVATAR EDIT SUBMIT------------>>
 function handleAvatarFormSubmit() {}
