@@ -9,9 +9,11 @@ import {
   config,
   editButton,
   addButton,
+  editPictureButton,
   profileInputList,
   formList,
   formValidators,
+  options,
 } from "../utils/constants.js";
 import UserInfo from "../components/UserInfo.js";
 
@@ -44,6 +46,13 @@ const cardsContainer = new Section(
 //----------------CALL RENDERER METHOD ON CARDSCONTAINER------------------->>
 cardsContainer.rendererItems();
 
+//-----------CREATE A MODALWITHFORM INSTANCE FOR THE CHANGE PICTURE------------>>
+const avatarEditModal = new ModalWithForm(
+  "#modal-change-picture",
+  handleAvatarFormSubmit,
+  config
+);
+
 //-----------CREATE A MODALWITHFORM INSTANCE FOR THE PROFILE EDIT------------>>
 const profileEditModal = new ModalWithForm(
   "#modal-profile-edit",
@@ -60,6 +69,9 @@ const addImageModal = new ModalWithForm(
 
 //-----------CREATE A MODALWITHIMAGE INSTANCE FOR THE PREVIEW IMAGE------------>>
 const previewModal = new ModalWithImage("#image-preview-modal");
+
+//-----------CREATE A FUNCTION THAT HANDLES AVATAR EDIT SUBMIT------------>>
+function handleAvatarFormSubmit() {}
 
 //-----------CREATE A FUNCTION THAT HANDLES PROFILE EDIT SUBMIT------------>>
 function handleProfileFormSubmit(values) {
@@ -98,6 +110,9 @@ editButton.addEventListener("click", () => {
 //-----------ADD A CLICK EVENT LISTENER TO THE ADD BUTTON------------>>
 addButton.addEventListener("click", () => addImageModal.open());
 
+//-----------ADD A CLICK EVENT LISTENER TO THE EDIT PICTURE BUTTON------------>>
+editPictureButton.addEventListener("click", () => avatarEditModal.open());
+
 //-----------ADD EVENT LISTENERS TO THE EDIT PROFILE MODAL----------->>
 profileEditModal.setEventListeners();
 
@@ -106,3 +121,6 @@ addImageModal.setEventListeners();
 
 //-----------ADD EVENT LISTENERS TO THE PREVIEW IMAGE MODAL----------->>
 previewModal.setEventListeners();
+
+//-----------ADD EVENT LISTENERS TO THE CHANGE PICTURE MODAL----------->>
+avatarEditModal.setEventListeners();
