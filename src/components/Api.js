@@ -17,26 +17,18 @@ export default class Api {
   getUserInfo() {
     return fetch(`${this._baseUrl}/users/me`, {
       headers: this._headers,
-    })
-      .then((res) => {
-        this._checkResponse(res);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
+    }).then((res) => {
+      this._checkResponse(res);
+    });
   }
 
   //-----------------METHOD TO GET INTIAL CARDS------------------>>
   getInitialCards() {
     return fetch(`${this._baseUrl}/cards`, {
       headers: this._headers,
-    })
-      .then((res) => {
-        this._checkResponse(res);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
+    }).then((res) => {
+      this._checkResponse(res);
+    });
   }
 
   //-----------------METHOD TO EDIT PROFILE------------------>>
@@ -48,13 +40,9 @@ export default class Api {
         name: name,
         about: description,
       }),
-    })
-      .then((res) => {
-        this._checkResponse(res);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
+    }).then((res) => {
+      this._checkResponse(res);
+    });
   }
 
   //-----------------METHOD TO ADD CARD------------------>>
@@ -66,13 +54,39 @@ export default class Api {
         name: name,
         link: link,
       }),
-    })
-      .then((res) => {
-        this._checkResponse(res);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
+    }).then((res) => {
+      this._checkResponse(res);
+    });
+  }
+
+  //-----------------METHOD TO DELETE CARD------------------>>
+  deleteCard(cardId) {
+    fetch(`${this._baseUrl}/cards/${cardId}`, {
+      method: "DELETE",
+      headers: this._headers,
+    }).then((res) => {
+      this._checkResponse(res);
+    });
+  }
+
+  //-----------------METHOD TO LIKE CARD------------------>>
+  likeCard(cardId) {
+    fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
+      method: "PUT",
+      headers: this._headers,
+    }).then((res) => {
+      this._checkResponse(res);
+    });
+  }
+
+  //-----------------METHOD TO DELETE LIKE------------------>>
+  dislikeCard(cardId) {
+    fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
+      method: "DELETE",
+      headers: this._headers,
+    }).then((res) => {
+      this._checkResponse(res);
+    });
   }
 }
 
