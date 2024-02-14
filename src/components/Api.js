@@ -27,7 +27,7 @@ export default class Api {
     return fetch(`${this._baseUrl}/cards`, {
       headers: this._headers,
     }).then((res) => {
-      this._checkResponse(res);
+      return this._checkResponse(res);
     });
   }
 
@@ -41,7 +41,7 @@ export default class Api {
         about: description,
       }),
     }).then((res) => {
-      this._checkResponse(res);
+      return this._checkResponse(res);
     });
   }
 
@@ -55,7 +55,7 @@ export default class Api {
         link: link,
       }),
     }).then((res) => {
-      this._checkResponse(res);
+      return this._checkResponse(res);
     });
   }
 
@@ -65,7 +65,7 @@ export default class Api {
       method: "DELETE",
       headers: this._headers,
     }).then((res) => {
-      this._checkResponse(res);
+      return this._checkResponse(res);
     });
   }
 
@@ -75,7 +75,7 @@ export default class Api {
       method: "PUT",
       headers: this._headers,
     }).then((res) => {
-      this._checkResponse(res);
+      return this._checkResponse(res);
     });
   }
 
@@ -85,7 +85,7 @@ export default class Api {
       method: "DELETE",
       headers: this._headers,
     }).then((res) => {
-      this._checkResponse(res);
+      return this._checkResponse(res);
     });
   }
 
@@ -97,7 +97,7 @@ export default class Api {
         avatar: link,
       }),
     }).then((res) => {
-      this._checkResponse(res);
+      return this._checkResponse(res);
     });
   }
 }

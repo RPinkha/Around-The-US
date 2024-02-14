@@ -19,6 +19,13 @@ import {
 } from "../utils/constants.js";
 import UserInfo from "../components/UserInfo.js";
 
+//-----------CREATE A NEW CLASS INSTANCE FOR THE USER INFO------------>>
+const userInfo = new UserInfo({
+  nameSelector: ".profile__name",
+  descriptionSelector: ".profile__description",
+  avatarSelector: ".profile__photo",
+});
+
 //-----------CREATE A NEW CLASS INSTANCE FOR THE API------------>>
 const api = new Api(options);
 
@@ -34,12 +41,19 @@ api
   })
   .catch((err) => console.log(err));
 
-//-----------CREATE A NEW CLASS INSTANCE FOR THE USER INFO------------>>
-const userInfo = new UserInfo({
-  nameSelector: ".profile__name",
-  descriptionSelector: ".profile__description",
-  avatarSelector: ".profile__photo",
-});
+//-----------GET THE INITIAL CARDS FROM THE API------------>>
+api
+  .getInitialCards()
+  .then((res) => {
+    //-----------CREATE A NEW CLASS INSTANCE FOR THE CARDS CONTAINER------------>>
+    const cardsContainer = new Section(
+      { items: res, renderer: renderCard },
+      ".cards__list"
+    );
+    //----------------CALL RENDERER METHOD ON CARDSCONTAINER------------------->>
+    cardsContainer.rendererItems();
+  })
+  .catch((err) => console.log(err));
 
 //-----------------FORM VALIDATOR CREATOR AND ENABLING------------------>>
 formList.forEach((form) => {
@@ -54,15 +68,6 @@ function renderCard(cardData) {
   const card = new Card(cardData, "#card", handleImageClick);
   return card.generateCard();
 }
-
-//-----------CREATE A NEW CLASS INSTANCE FOR THE CARDS CONTAINER------------>>
-const cardsContainer = new Section(
-  { items: initialCards, renderer: renderCard },
-  ".cards__list"
-);
-
-//----------------CALL RENDERER METHOD ON CARDSCONTAINER------------------->>
-cardsContainer.rendererItems();
 
 //-----CREATE A MODALWITHCONFIRMATION INSTANCE FOR CARD DELETE CONFIRMATION------------>>
 const deleteConfirmationModal = new ModalWithConfirmation(
