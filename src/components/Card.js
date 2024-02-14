@@ -3,8 +3,14 @@ export default class Card {
   constructor(data, cardSelector, handleImageClick) {
     this._name = data.name;
     this._link = data.link;
+    this._id = data._id;
     this._cardSelector = cardSelector;
     this.handleImageClick = handleImageClick;
+  }
+
+  //-----------METHOD TO GET THE CARD ELEMENT OUT OF THE TEMPLATE-------------->>
+  getCardId() {
+    return this._id;
   }
 
   //-----------METHOD TO GET THE CARD ELEMENT OUT OF THE TEMPLATE-------------->>

@@ -22,10 +22,23 @@ import UserInfo from "../components/UserInfo.js";
 //-----------CREATE A NEW CLASS INSTANCE FOR THE API------------>>
 const api = new Api(options);
 
+//-----------GET THE USER INFORMATION FROM THE API------------>>
+api
+  .getUserInfo()
+  .then((res) => {
+    userInfo.setUserInfo({
+      name: res.name,
+      description: res.about,
+    });
+    userInfo.setUserAvatar(res.avatar);
+  })
+  .catch((err) => console.log(err));
+
 //-----------CREATE A NEW CLASS INSTANCE FOR THE USER INFO------------>>
 const userInfo = new UserInfo({
   nameSelector: ".profile__name",
   descriptionSelector: ".profile__description",
+  avatarSelector: ".profile__photo",
 });
 
 //-----------------FORM VALIDATOR CREATOR AND ENABLING------------------>>
