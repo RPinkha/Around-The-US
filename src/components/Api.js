@@ -1,7 +1,7 @@
 export default class Api {
   //---------------------------API CONSTRUCTOR------------------------------->>
   constructor(options) {
-    this._baseUrl = options.baseUrl; //https://around-api.en.tripleten-services.com/v1
+    this._baseUrl = options.baseUrl;
     this._headers = options.headers;
   }
 
@@ -70,25 +70,16 @@ export default class Api {
   }
 
   //-----------------METHOD TO LIKE CARD------------------>>
-  likeCard(cardId) {
+  likeCard(cardId, method) {
     return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
-      method: "PUT",
+      method: method, // "DELETE" or "PUT"
       headers: this._headers,
     }).then((res) => {
       return this._checkResponse(res);
     });
   }
 
-  //-----------------METHOD TO DELETE LIKE------------------>>
-  dislikeCard(cardId) {
-    return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
-      method: "DELETE",
-      headers: this._headers,
-    }).then((res) => {
-      return this._checkResponse(res);
-    });
-  }
-
+  //-----------------METHOD TO CHANGE AVATAR------------------>>
   changeAvatar(link) {
     return fetch(`${this._baseUrl}/users/me/avatar`, {
       method: "PATCH",
@@ -101,5 +92,3 @@ export default class Api {
     });
   }
 }
-
-// My autherization Token: 739decfe-71be-4d0d-8961-a71a0f6cba52

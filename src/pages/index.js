@@ -19,6 +19,9 @@ import {
 } from "../utils/constants.js";
 import UserInfo from "../components/UserInfo.js";
 
+//--------------------DEFINING CARDSCONTAINER----------------->>
+let cardsContainer = 0;
+
 //-----------CREATE A NEW CLASS INSTANCE FOR THE USER INFO------------>>
 const userInfo = new UserInfo({
   nameSelector: ".profile__name",
@@ -46,7 +49,7 @@ api
   .getInitialCards()
   .then((res) => {
     //-----------CREATE A NEW CLASS INSTANCE FOR THE CARDS CONTAINER------------>>
-    const cardsContainer = new Section(
+    cardsContainer = new Section(
       { items: res, renderer: renderCard },
       ".cards__list"
     );
@@ -122,8 +125,13 @@ function handleProfileFormSubmit(values) {
 
 //------------CREATE A FUNCTION THAT HANDLES ADD IMAGE SUBMIT---------->>
 function handleAddImageFormSubmit(values) {
-  const newCard = renderCard(values);
-  cardsContainer.addItem(newCard);
+  api
+    .addCard(values)
+    .then((res) => {
+      const newCard = renderCard(res);
+      cardsContainer.addItem(newCard);
+    })
+    .catch((err) => console.log(err));
   formValidators.addCardForm.resetForm();
   formValidators.addCardForm.disableSubmit();
   addImageModal.close();
