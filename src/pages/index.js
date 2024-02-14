@@ -41,7 +41,7 @@ api
     });
     userInfo.setUserAvatar(res.avatar);
   })
-  .catch((err) => console.log(err));
+  .catch(console.error);
 
 //-----------GET THE INITIAL CARDS FROM THE API------------>>
 api
@@ -55,7 +55,7 @@ api
     //----------------CALL RENDERER METHOD ON CARDSCONTAINER------------------->>
     cardsContainer.rendererItems();
   })
-  .catch((err) => console.log(err));
+  .catch(console.error);
 
 //-----------------FORM VALIDATOR CREATOR AND ENABLING------------------>>
 formList.forEach((form) => {
@@ -111,9 +111,17 @@ const previewModal = new ModalWithImage("#image-preview-modal");
 function handleDeleteClick(card) {
   deleteConfirmationModal.open();
   deleteConfirmationModal.setCallback(() => {
-    api.deleteCard(card.getId()).catch((err) => console.log(err));
-    card.deleteCard();
-    deleteConfirmationModal.close();
+    deleteConfirmationModal.renderSaving(true);
+    api
+      .deleteCard(card.getId())
+      .then(() => {
+        card.deleteCard();
+        deleteConfirmationModal.close();
+      })
+      .catch(console.error)
+      .finally(() => {
+        deleteConfirmationModal.renderSaving(false);
+      });
   });
 }
 
@@ -122,7 +130,7 @@ function handleLikeClick(card) {
   api
     .likeCard(card.getId(), card.isLiked)
     .then((res) => card.toggleLikeCard(res.isLiked))
-    .catch((err) => console.log(err));
+    .catch(console.error);
 }
 
 //-----------CREATE A FUNCTION THAT HANDLES AVATAR EDIT SUBMIT------------>>
@@ -132,10 +140,12 @@ function handleAvatarFormSubmit(values) {
     .changeAvatar(values)
     .then((res) => {
       userInfo.setUserAvatar(res.avatar);
+      avatarEditModal.close();
     })
-    .catch((err) => console.log(err))
-    .finally(avatarEditModal.renderSaving(false));
-  avatarEditModal.close();
+    .catch(console.error)
+    .finally(() => {
+      avatarEditModal.renderSaving(false);
+    });
 }
 
 //-----------CREATE A FUNCTION THAT HANDLES PROFILE EDIT SUBMIT------------>>
@@ -148,10 +158,12 @@ function handleProfileFormSubmit(values) {
         name: res.name,
         description: res.about,
       });
+      profileEditModal.close();
     })
-    .catch((err) => console.log(err))
-    .finally(profileEditModal.renderSaving(false));
-  profileEditModal.close();
+    .catch(console.error)
+    .finally(() => {
+      profileEditModal.renderSaving(false);
+    });
 }
 
 //------------CREATE A FUNCTION THAT HANDLES ADD IMAGE SUBMIT---------->>
@@ -162,12 +174,14 @@ function handleAddImageFormSubmit(values) {
     .then((res) => {
       const newCard = renderCard(res);
       cardsContainer.addItem(newCard);
+      formValidators.addCardForm.resetForm();
+      formValidators.addCardForm.disableSubmit();
+      addImageModal.close();
     })
-    .catch((err) => console.log(err))
-    .finally(addImageModal.renderSaving(false));
-  formValidators.addCardForm.resetForm();
-  formValidators.addCardForm.disableSubmit();
-  addImageModal.close();
+    .catch(console.error)
+    .finally(() => {
+      addImageModal.renderSaving(false);
+    });
 }
 
 //--------IMAGE CLICK HANDLER FUNCTION TO POPULATE PREVIEW MODAL------------->>
