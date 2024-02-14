@@ -7,7 +7,6 @@ import ModalWithImage from "../components/ModalWithImage.js";
 import ModalWithConfirmation from "../components/ModalWithConfirmation.js";
 import Api from "../components/Api.js";
 import {
-  initialCards,
   config,
   editButton,
   addButton,
@@ -68,14 +67,14 @@ formList.forEach((form) => {
 
 //-----------------------RENDER CARD FUNCTION----------------------->>
 function renderCard(cardData) {
-  const card = new Card(cardData, "#card", handleImageClick);
+  const card = new Card(cardData, "#card", handleImageClick, handleDeleteClick);
   return card.generateCard();
 }
 
 //-----CREATE A MODALWITHCONFIRMATION INSTANCE FOR CARD DELETE CONFIRMATION------------>>
 const deleteConfirmationModal = new ModalWithConfirmation(
   "#modal-confirm-delete",
-  handleDeleteCardSubmit,
+  handleDeleteSubmit,
   config
 );
 
@@ -103,8 +102,16 @@ const addImageModal = new ModalWithForm(
 //-----------CREATE A MODALWITHIMAGE INSTANCE FOR THE PREVIEW IMAGE------------>>
 const previewModal = new ModalWithImage("#image-preview-modal");
 
+//-----------CREATE A FUNCTION THAT HANDLES DELETE CLICK------------>>
+function handleDeleteClick(card) {
+  deleteConfirmationModal.open();
+  card.getId();
+}
+
 //-----------CREATE A FUNCTION THAT HANDLES CARD DELETE------------>>
-function handleDeleteCardSubmit() {}
+function handleDeleteSubmit(card) {
+  card.getId();
+}
 
 //-----------CREATE A FUNCTION THAT HANDLES AVATAR EDIT SUBMIT------------>>
 function handleAvatarFormSubmit() {}

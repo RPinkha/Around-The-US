@@ -1,15 +1,19 @@
+import { data } from "autoprefixer";
+
 export default class Card {
   //---------------------------CARD CONSTRUCTOR------------------------------->>
-  constructor(data, cardSelector, handleImageClick) {
+  constructor(data, cardSelector, handleImageClick, handleDeleteClick) {
     this._name = data.name;
     this._link = data.link;
     this._id = data._id;
     this._cardSelector = cardSelector;
-    this.handleImageClick = handleImageClick;
+    this._handleImageClick = handleImageClick;
+    this._handleDeleteClick = handleDeleteClick;
   }
 
   //-----------METHOD TO GET THE CARD ELEMENT OUT OF THE TEMPLATE-------------->>
-  getCardId() {
+  getId() {
+    console.log(this._id);
     return this._id;
   }
 
@@ -27,7 +31,7 @@ export default class Card {
   _setEventListeners() {
     //-----------IMAGE ELEMENT CLICK EVENT LISTENER----------->>
     this._imageElement.addEventListener("click", () => {
-      this.handleImageClick(this._name, this._link);
+      this._handleImageClick(this._name, this._link);
     });
 
     //-----------LIKE BUTTON CLICK EVENT LISTENER------------>>
@@ -37,12 +41,12 @@ export default class Card {
 
     //-----------TRASH BUTTON CLICK EVENT LISTENER----------->>
     this._trashButton.addEventListener("click", () => {
-      this._deleteCard();
+      this._handleDeleteClick(this);
     });
   }
 
   //-----------METHOD TO HANDLE CARD TRASH BUTTON CLICK----------->>
-  _deleteCard() {
+  deleteCard() {
     this._element.remove();
     this._element = null;
   }
