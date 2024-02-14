@@ -74,7 +74,6 @@ function renderCard(cardData) {
 //-----CREATE A MODALWITHCONFIRMATION INSTANCE FOR CARD DELETE CONFIRMATION------------>>
 const deleteConfirmationModal = new ModalWithConfirmation(
   "#modal-confirm-delete",
-  handleDeleteSubmit,
   config
 );
 
@@ -104,13 +103,13 @@ const previewModal = new ModalWithImage("#image-preview-modal");
 
 //-----------CREATE A FUNCTION THAT HANDLES DELETE CLICK------------>>
 function handleDeleteClick(card) {
+  console.log(card.getId());
   deleteConfirmationModal.open();
-  card.getId();
-}
-
-//-----------CREATE A FUNCTION THAT HANDLES CARD DELETE------------>>
-function handleDeleteSubmit(card) {
-  card.getId();
+  deleteConfirmationModal.setCallback(() => {
+    api.deleteCard(card.getId()).catch((err) => console.log(err));
+    card.deleteCard();
+    deleteConfirmationModal.close();
+  });
 }
 
 //-----------CREATE A FUNCTION THAT HANDLES AVATAR EDIT SUBMIT------------>>
@@ -180,3 +179,6 @@ previewModal.setEventListeners();
 
 //-----------ADD EVENT LISTENERS TO THE CHANGE PICTURE MODAL----------->>
 avatarEditModal.setEventListeners();
+
+//-----------ADD EVENT LISTENERS TO THE DELETE CONFIRMATION MODAL----------->>
+deleteConfirmationModal.setEventListeners();

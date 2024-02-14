@@ -13,7 +13,6 @@ export default class Card {
 
   //-----------METHOD TO GET THE CARD ELEMENT OUT OF THE TEMPLATE-------------->>
   getId() {
-    console.log(this._id);
     return this._id;
   }
 
