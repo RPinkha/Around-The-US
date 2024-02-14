@@ -80,7 +80,7 @@ export default class Api {
   }
 
   //-----------------METHOD TO CHANGE AVATAR------------------>>
-  changeAvatar(link) {
+  changeAvatar({ link }) {
     return fetch(`${this._baseUrl}/users/me/avatar`, {
       method: "PATCH",
       headers: this._headers,

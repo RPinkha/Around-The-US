@@ -126,10 +126,21 @@ function handleLikeClick(card) {
 }
 
 //-----------CREATE A FUNCTION THAT HANDLES AVATAR EDIT SUBMIT------------>>
-function handleAvatarFormSubmit() {}
+function handleAvatarFormSubmit(values) {
+  avatarEditModal.renderSaving(true);
+  api
+    .changeAvatar(values)
+    .then((res) => {
+      userInfo.setUserAvatar(res.avatar);
+    })
+    .catch((err) => console.log(err))
+    .finally(avatarEditModal.renderSaving(false));
+  avatarEditModal.close();
+}
 
 //-----------CREATE A FUNCTION THAT HANDLES PROFILE EDIT SUBMIT------------>>
 function handleProfileFormSubmit(values) {
+  profileEditModal.renderSaving(true);
   api
     .editProfile(values)
     .then((res) => {
@@ -138,19 +149,22 @@ function handleProfileFormSubmit(values) {
         description: res.about,
       });
     })
-    .catch((err) => console.log(err));
+    .catch((err) => console.log(err))
+    .finally(profileEditModal.renderSaving(false));
   profileEditModal.close();
 }
 
 //------------CREATE A FUNCTION THAT HANDLES ADD IMAGE SUBMIT---------->>
 function handleAddImageFormSubmit(values) {
+  addImageModal.renderSaving(true);
   api
     .addCard(values)
     .then((res) => {
       const newCard = renderCard(res);
       cardsContainer.addItem(newCard);
     })
-    .catch((err) => console.log(err));
+    .catch((err) => console.log(err))
+    .finally(addImageModal.renderSaving(false));
   formValidators.addCardForm.resetForm();
   formValidators.addCardForm.disableSubmit();
   addImageModal.close();
