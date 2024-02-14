@@ -13,82 +13,73 @@ export default class Api {
     return Promise.reject(`Error :${res.status}`);
   }
 
+  //-----------------METHOD TO REQUEST RESPONSE FROM SERVER------------------>>
+  _request(url, options) {
+    return fetch(url, options).then(this._checkResponse);
+  }
+
   //-----------------METHOD TO GET USER INFO------------------>>
   getUserInfo() {
-    return fetch(`${this._baseUrl}/users/me`, {
+    return this._request(`${this._baseUrl}/users/me`, {
       headers: this._headers,
-    }).then((res) => {
-      return this._checkResponse(res);
     });
   }
 
   //-----------------METHOD TO GET INTIAL CARDS------------------>>
   getInitialCards() {
-    return fetch(`${this._baseUrl}/cards`, {
+    return this._request(`${this._baseUrl}/cards`, {
       headers: this._headers,
-    }).then((res) => {
-      return this._checkResponse(res);
     });
   }
 
   //-----------------METHOD TO EDIT PROFILE------------------>>
   editProfile({ name, description }) {
-    return fetch(`${this._baseUrl}/users/me`, {
+    return this._request(`${this._baseUrl}/users/me`, {
       method: "PATCH",
       headers: this._headers,
       body: JSON.stringify({
         name: name,
         about: description,
       }),
-    }).then((res) => {
-      return this._checkResponse(res);
     });
   }
 
   //-----------------METHOD TO ADD CARD------------------>>
   addCard({ name, link }) {
-    return fetch(`${this._baseUrl}/cards`, {
+    return this._request(`${this._baseUrl}/cards`, {
       method: "POST",
       headers: this._headers,
       body: JSON.stringify({
         name: name,
         link: link,
       }),
-    }).then((res) => {
-      return this._checkResponse(res);
     });
   }
 
   //-----------------METHOD TO DELETE CARD------------------>>
   deleteCard(cardId) {
-    return fetch(`${this._baseUrl}/cards/${cardId}`, {
+    return this._request(`${this._baseUrl}/cards/${cardId}`, {
       method: "DELETE",
       headers: this._headers,
-    }).then((res) => {
-      return this._checkResponse(res);
     });
   }
 
   //-----------------METHOD TO LIKE CARD------------------>>
   likeCard(cardId, isLiked) {
-    return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
+    return this._request(`${this._baseUrl}/cards/${cardId}/likes`, {
       method: isLiked ? "DELETE" : "PUT",
       headers: this._headers,
-    }).then((res) => {
-      return this._checkResponse(res);
     });
   }
 
   //-----------------METHOD TO CHANGE AVATAR------------------>>
   changeAvatar({ link }) {
-    return fetch(`${this._baseUrl}/users/me/avatar`, {
+    return this._request(`${this._baseUrl}/users/me/avatar`, {
       method: "PATCH",
       headers: this._headers,
       body: JSON.stringify({
         avatar: link,
       }),
-    }).then((res) => {
-      return this._checkResponse(res);
     });
   }
 }
