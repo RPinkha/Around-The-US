@@ -108,7 +108,15 @@ function handleAvatarFormSubmit() {}
 
 //-----------CREATE A FUNCTION THAT HANDLES PROFILE EDIT SUBMIT------------>>
 function handleProfileFormSubmit(values) {
-  userInfo.setUserInfo(values);
+  api
+    .editProfile(values)
+    .then((res) => {
+      userInfo.setUserInfo({
+        name: res.name,
+        description: res.about,
+      });
+    })
+    .catch((err) => console.log(err));
   profileEditModal.close();
 }
 

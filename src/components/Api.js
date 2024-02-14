@@ -33,7 +33,7 @@ export default class Api {
 
   //-----------------METHOD TO EDIT PROFILE------------------>>
   editProfile({ name, description }) {
-    fetch(`${this._baseUrl}/users/me`, {
+    return fetch(`${this._baseUrl}/users/me`, {
       method: "PATCH",
       headers: this._headers,
       body: JSON.stringify({
@@ -47,7 +47,7 @@ export default class Api {
 
   //-----------------METHOD TO ADD CARD------------------>>
   addCard({ name, link }) {
-    fetch(`${this._baseUrl}/cards`, {
+    return fetch(`${this._baseUrl}/cards`, {
       method: "POST",
       headers: this._headers,
       body: JSON.stringify({
@@ -61,7 +61,7 @@ export default class Api {
 
   //-----------------METHOD TO DELETE CARD------------------>>
   deleteCard(cardId) {
-    fetch(`${this._baseUrl}/cards/${cardId}`, {
+    return fetch(`${this._baseUrl}/cards/${cardId}`, {
       method: "DELETE",
       headers: this._headers,
     }).then((res) => {
@@ -71,7 +71,7 @@ export default class Api {
 
   //-----------------METHOD TO LIKE CARD------------------>>
   likeCard(cardId) {
-    fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
+    return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
       method: "PUT",
       headers: this._headers,
     }).then((res) => {
@@ -81,7 +81,7 @@ export default class Api {
 
   //-----------------METHOD TO DELETE LIKE------------------>>
   dislikeCard(cardId) {
-    fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
+    return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
       method: "DELETE",
       headers: this._headers,
     }).then((res) => {
@@ -90,7 +90,7 @@ export default class Api {
   }
 
   changeAvatar(link) {
-    fetch(`${this._baseUrl}/users/me/avatar`, {
+    return fetch(`${this._baseUrl}/users/me/avatar`, {
       method: "PATCH",
       headers: this._headers,
       body: JSON.stringify({
