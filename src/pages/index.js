@@ -19,7 +19,7 @@ import {
 import UserInfo from "../components/UserInfo.js";
 
 //--------------------DEFINING CARDSCONTAINER----------------->>
-let cardsContainer = 0;
+let cardsContainer;
 
 //-----------CREATE A NEW CLASS INSTANCE FOR THE USER INFO------------>>
 const userInfo = new UserInfo({
@@ -67,7 +67,13 @@ formList.forEach((form) => {
 
 //-----------------------RENDER CARD FUNCTION----------------------->>
 function renderCard(cardData) {
-  const card = new Card(cardData, "#card", handleImageClick, handleDeleteClick);
+  const card = new Card(
+    cardData,
+    "#card",
+    handleImageClick,
+    handleDeleteClick,
+    handleLikeClick
+  );
   return card.generateCard();
 }
 
@@ -103,13 +109,20 @@ const previewModal = new ModalWithImage("#image-preview-modal");
 
 //-----------CREATE A FUNCTION THAT HANDLES DELETE CLICK------------>>
 function handleDeleteClick(card) {
-  console.log(card.getId());
   deleteConfirmationModal.open();
   deleteConfirmationModal.setCallback(() => {
     api.deleteCard(card.getId()).catch((err) => console.log(err));
     card.deleteCard();
     deleteConfirmationModal.close();
   });
+}
+
+//-----------CREATE A FUNCTION THAT HANDLES LIKE CLICK------------>>
+function handleLikeClick(card) {
+  api
+    .likeCard(card.getId(), card.isLiked)
+    .then((res) => card.toggleLikeCard(res.isLiked))
+    .catch((err) => console.log(err));
 }
 
 //-----------CREATE A FUNCTION THAT HANDLES AVATAR EDIT SUBMIT------------>>

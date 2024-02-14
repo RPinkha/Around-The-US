@@ -1,14 +1,20 @@
-import { data } from "autoprefixer";
-
 export default class Card {
   //---------------------------CARD CONSTRUCTOR------------------------------->>
-  constructor(data, cardSelector, handleImageClick, handleDeleteClick) {
+  constructor(
+    data,
+    cardSelector,
+    handleImageClick,
+    handleDeleteClick,
+    handleLikeClick
+  ) {
     this._name = data.name;
     this._link = data.link;
     this._id = data._id;
+    this.isLiked = data.isLiked;
     this._cardSelector = cardSelector;
     this._handleImageClick = handleImageClick;
     this._handleDeleteClick = handleDeleteClick;
+    this._handleLikeClick = handleLikeClick;
   }
 
   //-----------METHOD TO GET THE CARD ELEMENT OUT OF THE TEMPLATE-------------->>
@@ -35,7 +41,7 @@ export default class Card {
 
     //-----------LIKE BUTTON CLICK EVENT LISTENER------------>>
     this._likeButton.addEventListener("click", () => {
-      this._likeCard();
+      this._handleLikeClick(this);
     });
 
     //-----------TRASH BUTTON CLICK EVENT LISTENER----------->>
@@ -51,8 +57,15 @@ export default class Card {
   }
 
   //-----------METHOD TO HANDLE CARD LIKE BUTTON CLICK----------->>
-  _likeCard() {
-    this._likeButton.classList.toggle("card__like-button_active");
+  toggleLikeCard(isLiked) {
+    this.isLiked = isLiked;
+    this.renderLikeCard();
+  }
+
+  renderLikeCard() {
+    this.isLiked
+      ? this._likeButton.classList.add("card__like-button_active")
+      : this._likeButton.classList.remove("card__like-button_active");
   }
 
   //--------------METHOD TO POPULATE THE CARD ELEMENT------------------------>>
@@ -66,6 +79,7 @@ export default class Card {
     this._imageElement.setAttribute("src", this._link);
     this._imageElement.setAttribute("alt", this._name);
     this._element.querySelector(".card__title").textContent = this._name;
+    this.renderLikeCard();
 
     return this._element;
   }

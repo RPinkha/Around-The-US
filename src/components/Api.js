@@ -70,9 +70,9 @@ export default class Api {
   }
 
   //-----------------METHOD TO LIKE CARD------------------>>
-  likeCard(cardId, method) {
+  likeCard(cardId, isLiked) {
     return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
-      method: method, // "DELETE" or "PUT"
+      method: isLiked ? "DELETE" : "PUT",
       headers: this._headers,
     }).then((res) => {
       return this._checkResponse(res);
