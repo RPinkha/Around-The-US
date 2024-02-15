@@ -22,6 +22,13 @@ export default class ModalWithForm extends Modal {
       : (this._button.textContent = this._originalButtonText);
   }
 
+  //------------METHOD THAT FILLS THE INPUTS IN THE MODAL FORM-------------->>
+  setInputValues(data) {
+    this._inputList.forEach((input) => {
+      input.value = data[input.name];
+    });
+  }
+
   //------------METHOD THAT COLLECTS THE INPUT VALUES-------------->>
   _getInputValues() {
     const inputValues = {};

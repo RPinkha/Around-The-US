@@ -189,16 +189,9 @@ function handleImageClick(name, link) {
   previewModal.open({ name, link });
 }
 
-//---------PROFILE EDIT MODAL FILL INPUTS FUNCTIONS----------------->>
-function fillProfileInputs() {
-  const userCurrentInfo = userInfo.getUserInfo();
-  profileInputList[0].value = userCurrentInfo.name;
-  profileInputList[1].value = userCurrentInfo.description;
-}
-
 //-----------ADD A CLICK EVENT LISTENER TO THE EDIT BUTTON------------>>
 editButton.addEventListener("click", () => {
-  fillProfileInputs();
+  profileEditModal.setInputValues(userInfo.getUserInfo());
   formValidators.profileForm.checkValidity();
   profileEditModal.open();
 });
