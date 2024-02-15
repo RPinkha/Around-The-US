@@ -1,10 +1,25 @@
 export default class Card {
   //---------------------------CARD CONSTRUCTOR------------------------------->>
-  constructor(data, cardSelector, handleImageClick) {
+  constructor(
+    data,
+    cardSelector,
+    handleImageClick,
+    handleDeleteClick,
+    handleLikeClick
+  ) {
     this._name = data.name;
     this._link = data.link;
+    this._id = data._id;
+    this.isLiked = data.isLiked;
     this._cardSelector = cardSelector;
-    this.handleImageClick = handleImageClick;
+    this._handleImageClick = handleImageClick;
+    this._handleDeleteClick = handleDeleteClick;
+    this._handleLikeClick = handleLikeClick;
+  }
+
+  //-----------METHOD TO GET THE CARD ELEMENT OUT OF THE TEMPLATE-------------->>
+  getId() {
+    return this._id;
   }
 
   //-----------METHOD TO GET THE CARD ELEMENT OUT OF THE TEMPLATE-------------->>
@@ -21,29 +36,36 @@ export default class Card {
   _setEventListeners() {
     //-----------IMAGE ELEMENT CLICK EVENT LISTENER----------->>
     this._imageElement.addEventListener("click", () => {
-      this.handleImageClick(this._name, this._link);
+      this._handleImageClick(this._name, this._link);
     });
 
     //-----------LIKE BUTTON CLICK EVENT LISTENER------------>>
     this._likeButton.addEventListener("click", () => {
-      this._likeCard();
+      this._handleLikeClick(this);
     });
 
     //-----------TRASH BUTTON CLICK EVENT LISTENER----------->>
     this._trashButton.addEventListener("click", () => {
-      this._deleteCard();
+      this._handleDeleteClick(this);
     });
   }
 
   //-----------METHOD TO HANDLE CARD TRASH BUTTON CLICK----------->>
-  _deleteCard() {
+  deleteCard() {
     this._element.remove();
     this._element = null;
   }
 
   //-----------METHOD TO HANDLE CARD LIKE BUTTON CLICK----------->>
-  _likeCard() {
-    this._likeButton.classList.toggle("card__like-button_active");
+  toggleLikeCard(isLiked) {
+    this.isLiked = isLiked;
+    this.renderLikeCard();
+  }
+
+  renderLikeCard() {
+    this.isLiked
+      ? this._likeButton.classList.add("card__like-button_active")
+      : this._likeButton.classList.remove("card__like-button_active");
   }
 
   //--------------METHOD TO POPULATE THE CARD ELEMENT------------------------>>
@@ -57,6 +79,7 @@ export default class Card {
     this._imageElement.setAttribute("src", this._link);
     this._imageElement.setAttribute("alt", this._name);
     this._element.querySelector(".card__title").textContent = this._name;
+    this.renderLikeCard();
 
     return this._element;
   }

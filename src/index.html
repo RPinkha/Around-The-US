@@ -21,19 +21,20 @@
       <main class="content">
         <!-- PROFILE SECTION -->
         <section class="profile page__section">
-          <img
-            class="profile__photo"
-            src="<%=require('./images/avatar.jpg')%>"
-            alt="Avatar"
-          />
+          <img class="profile__photo" src="#" alt="Avatar" />
+          <button
+            class="profile__photo-button"
+            type="button"
+            aria-label="edit profile photo"
+          ></button>
           <div class="profile__info">
-            <h1 class="profile__name">Ruven Pinkhasov</h1>
+            <h1 class="profile__name"></h1>
             <button
               class="profile__edit-button"
               type="button"
               aria-label="edit profile"
             ></button>
-            <p class="profile__description">Chemical Engineer</p>
+            <p class="profile__description"></p>
           </div>
           <button
             class="profile__add-button"
@@ -118,10 +119,41 @@
                 id="card-url"
                 required
               />
-              <span class="modal__error" id="card-url-error">Error</span>
+              <span class="modal__error" id="card-url-error"></span>
             </label>
             <button class="modal__button" type="submit">Create</button>
           </form>
+        </div>
+      </div>
+
+      <!-- CHANGE PROFILE PICTURE MODAL -->
+      <div class="modal" id="modal-change-picture">
+        <div class="modal__container">
+          <button class="modal__close modal__close_type_form"></button>
+          <p class="modal__title">Change profile picture</p>
+          <form class="modal__form" name="changePictureForm" novalidate>
+            <label class="modal__label">
+              <input
+                type="url"
+                class="modal__input modal__input_type_image-link"
+                placeholder="Image link"
+                name="link"
+                id="card-url"
+                required
+              />
+              <span class="modal__error" id="card-url-error"></span>
+            </label>
+            <button class="modal__button" type="submit">Save</button>
+          </form>
+        </div>
+      </div>
+
+      <!-- COMFIRM DELETE MODAL -->
+      <div class="modal" id="modal-confirm-delete">
+        <div class="modal__container">
+          <button class="modal__close modal__close_type_form"></button>
+          <p class="modal__title">Are you sure?</p>
+          <button class="modal__button" type="submit">Yes</button>
         </div>
       </div>
 
