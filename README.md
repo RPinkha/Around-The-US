@@ -13,8 +13,8 @@ TripleTen Around the US - Third Project
 
 **Project Description:**
 
-This is the third project of the TripleTen software engineering cootcamp.
-This project encapsulates chapters 3-8 bootcamp. It shows the places visited by a person in the US.
+This is the third project of the TripleTen software engineering bootcamp.
+This project encapsulates chapters 3-9 bootcamp. It shows the places visited by a person in the US.
 
 **Technologies Used:**
 
@@ -25,4 +25,4 @@ Webpack was utilized to deploy the project.
 
 **Link to Github-Pages:**
 
-https://rpinkha.github.io/TripleTen-Project3-AroundTheUS/
+https://rpinkha.github.io/Around-The-US/
