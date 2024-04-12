@@ -15,8 +15,12 @@ import {
   formList,
   formValidators,
   options,
+  footerYear,
+  currentYear,
 } from "../utils/constants.js";
 import UserInfo from "../components/UserInfo.js";
+
+footerYear.textContent = currentYear;
 
 //--------------------DEFINING CARDSCONTAINER----------------->>
 let cardsContainer;

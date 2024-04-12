@@ -16,6 +16,12 @@ export const editPictureButton = profile.querySelector(
   ".profile__photo-button"
 );
 
+//------------CREATING FOOTER COPYRIGHT YEAR ELEMENTS------------------>>
+export const footerYear = document.querySelector(".footer__year");
+
+//------------CONSTANT WITH THE CURRENT YEAR------------------>>
+export const currentYear = new Date().getFullYear();
+
 //-----------DEFINING AN ARRAY OF ALL PROFILE EDIT INPUTS--------------->>
 const modalProfileEdit = document.querySelector("#modal-profile-edit");
 export const profileInputList = Array.from(
